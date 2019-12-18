@@ -1,10 +1,10 @@
-=SZ=
-==About==
+# SZ
+## About
 **SZ** is a life simulator game made using the Godot Engine.
-==License==
+## License
 All art and sound assets are CC0 (public domain).
 All code is under CC-BY-4.0 (attribution).
-==How to build==
+## How to build
 - Clone or download the source code.
 - Download [Godot](https://godotengine.org/download/linux).
 - In the project list, select "Import".
