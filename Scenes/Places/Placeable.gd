@@ -1,6 +1,8 @@
 extends StaticBody2D
 
 var move = false
+export var interact = ""
+var on_me = false
 
 func _ready():
     update_z()
@@ -11,9 +13,18 @@ func _physics_process(delta):
         update_z()
 
 func update_z():
-    z_index = global_position.y / 50
+    z_index = global_position.y / 10
 
 func _input(event):
     if event.is_action_pressed("action"):
-        move = false
-        $Col.disabled = false
+        if move:
+            move = false
+            $Col.disabled = false
+
+func _on_Interactive_body_entered(body):
+    if body == get_parent().get_node("Player"):
+        on_me = true
+
+func _on_Interactive_body_exited(body):
+    if body == get_parent().get_node("Player"):
+        on_me = false
