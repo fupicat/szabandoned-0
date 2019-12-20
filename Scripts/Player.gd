@@ -6,7 +6,7 @@ const RUNADD = 400
 const SLIP = 0.20
 
 func _physics_process(delta):
-    z_index = position.y
+    z_index = global_position.y / 50
     var run = RUNADD * int(Input.is_action_pressed("run"))
     var ydir = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
     move.y = lerp(move.y, (SPEED + run) * ydir, SLIP)
