@@ -16,3 +16,4 @@ func update_z():
 func _input(event):
     if event.is_action_pressed("action"):
         move = false
+        $Col.disabled = false

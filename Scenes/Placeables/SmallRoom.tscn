@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 737.784, 67.5029 )
+extents = Vector2( 737.784, 74.2851 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 732.022, 369.606 )
@@ -16,18 +16,18 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 197.96 )
+position = Vector2( 0, 205.326 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.698349, -20.4878 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -68.2879 )
+[node name="Col" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -60.9214 )
 shape = SubResource( 1 )
 
 [node name="Wall" type="Area2D" parent="."]
-position = Vector2( 0, -388.915 )
+position = Vector2( 0, -381.549 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+[node name="WallCol" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 2 )
 
 [node name="Objects" type="Node2D" parent="Wall"]
