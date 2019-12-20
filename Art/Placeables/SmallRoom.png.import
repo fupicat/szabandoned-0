@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Floor.png-640a4f6623fa9002d844daaf6425e1fd.stex"
+path="res://.import/SmallRoom.png-c928232a17386681c7db837bdf1dd585.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Floor.png"
-dest_files=[ "res://.import/Floor.png-640a4f6623fa9002d844daaf6425e1fd.stex" ]
+source_file="res://Art/Placeables/SmallRoom.png"
+dest_files=[ "res://.import/SmallRoom.png-c928232a17386681c7db837bdf1dd585.stex" ]
 
 [params]
 

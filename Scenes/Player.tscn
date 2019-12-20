@@ -13,16 +13,16 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -50 )
+[node name="Scrat" type="Sprite" parent="."]
+position = Vector2( 0, -132.2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.902496, 82.1276 )
+position = Vector2( 0, -0.000139281 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -50 )
+position = Vector2( 0, -132.2 )
 current = true
 zoom = Vector2( 1.4, 1.4 )
 drag_margin_h_enabled = false

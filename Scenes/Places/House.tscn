@@ -14,11 +14,10 @@ extents = Vector2( 3518.18, 50 )
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1226.8, 1760.62 )
+position = Vector2( 3101.51, 1273.6 )
 z_index = 1
 
 [node name="Grama" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 2838.04 )
 __meta__ = {
 "_edit_group_": true,

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Places/Placeable.gd" type="Script" id=1]
+[ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 737.784, 67.5029 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 732.022, 369.606 )
+
+[node name="SmallRoom" type="StaticBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 197.96 )
+texture = ExtResource( 2 )
+offset = Vector2( -0.698349, -20.4878 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -68.2879 )
+shape = SubResource( 1 )
+
+[node name="Wall" type="Area2D" parent="."]
+position = Vector2( 0, -388.915 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource( 2 )
+
+[node name="Objects" type="Node2D" parent="Wall"]
