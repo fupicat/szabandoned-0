@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var move = false
-export var interact = ""
+export var interact = []
 var on_me = false
 
 func _ready():

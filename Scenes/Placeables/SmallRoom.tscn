@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Places/Placeable.gd" type="Script" id=1]
 [ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/BehindDisappear.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 737.784, 64.2883 )
@@ -13,13 +14,14 @@ extents = Vector2( 732.022, 369.606 )
 extents = Vector2( 731.515, 554.104 )
 
 [node name="SmallRoom" type="StaticBody2D" groups=[
-"Room",
 "Interactable",
+"Room",
 ]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+interact = [ "move", "delete" ]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 205.326 )
@@ -33,6 +35,7 @@ shape = SubResource( 1 )
 [node name="Wall" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 0, -381.549 )
+script = ExtResource( 3 )
 
 [node name="WallCol" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 2 )
@@ -40,9 +43,12 @@ shape = SubResource( 2 )
 [node name="Objects" type="Node2D" parent="Wall"]
 
 [node name="Interactive" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( -0.160816, 569.066 )
 
 [node name="Col" type="CollisionShape2D" parent="Interactive"]
 shape = SubResource( 3 )
+[connection signal="body_entered" from="Wall" to="Wall" method="_on_body_entered"]
+[connection signal="body_exited" from="Wall" to="Wall" method="_on_body_exited"]
 [connection signal="body_entered" from="Interactive" to="." method="_on_Interactive_body_entered"]
 [connection signal="body_exited" from="Interactive" to="." method="_on_Interactive_body_exited"]
