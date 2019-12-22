@@ -10,19 +10,31 @@ func _ready():
     $Player/Camera2D.limit_bottom = 4720
 
 func _input(event):
-    if event.is_action_pressed("1") and !edit_mode:
-        edit_mode = true
-        old_xy = $Player.global_position
-        $Player.hide()
-        old_col = $Player/CollisionShape2D.shape
-        var obj = load("res://Scenes/Placeables/SmallRoom.tscn").instance()
-        add_child(obj)
-        obj.get_node("Col").disabled = true
-        $Player/CollisionShape2D.shape = obj.get_node("Col").shape
-        obj.move = true
-    if event.is_action_pressed("action") and edit_mode:
+    if event.is_action_pressed("1"):
+        switch_edit_mode()
+    if event.is_action_pressed("2"):
+        add_placeable(load("res://Scenes/Placeables/SmallRoom.tscn"))
+
+func switch_edit_mode():
+    if edit_mode:
+        for node in get_tree().get_nodes_in_group("Interactable"):
+            if node.move:
+                node.move = false
+                node.get_node("Col").disabled = false
         edit_mode = false
         $Player.global_position = old_xy
         $Player/CollisionShape2D.shape = old_col
         $Player.show()
         $Player/CollisionShape2D.disabled = false
+    else:
+        edit_mode = true
+        old_xy = $Player.global_position
+        old_col = $Player/CollisionShape2D.shape
+        $Player.hide()
+
+func add_placeable(var scene):
+    var obj = scene.instance()
+    add_child(obj)
+    obj.get_node("Col").disabled = true
+    $Player/CollisionShape2D.shape = obj.get_node("Col").shape
+    obj.move = true
