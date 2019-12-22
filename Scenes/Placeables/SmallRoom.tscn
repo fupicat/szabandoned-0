@@ -15,7 +15,6 @@ extents = Vector2( 731.515, 554.104 )
 
 [node name="SmallRoom" type="StaticBody2D" groups=[
 "Interactable",
-"Room",
 ]]
 script = ExtResource( 1 )
 __meta__ = {
@@ -32,7 +31,9 @@ offset = Vector2( -0.698349, -20.4878 )
 position = Vector2( 0, -60.9214 )
 shape = SubResource( 1 )
 
-[node name="Wall" type="Area2D" parent="."]
+[node name="Wall" type="Area2D" parent="." groups=[
+"Wall",
+]]
 editor/display_folded = true
 position = Vector2( 0, -381.549 )
 script = ExtResource( 3 )

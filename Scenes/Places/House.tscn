@@ -47,3 +47,7 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Grama"]
 position = Vector2( -7.66284, 1903.65 )
 shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, 2838.04 )
+zoom = Vector2( 3.6, 3.6 )

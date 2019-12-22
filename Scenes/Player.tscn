@@ -46,6 +46,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
@@ -67,15 +79,16 @@ shape = SubResource( 1 )
 position = Vector2( 0, -132.2 )
 current = true
 zoom = Vector2( 1.7, 1.7 )
+process_mode = 0
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
 
-[node name="Z" type="Node2D" parent="."]
+[node name="Actions" type="Node2D" parent="."]
+visible = false
 z_index = 4096
 
-[node name="Actions" type="Control" parent="Z"]
-editor/display_folded = true
+[node name="Menu" type="Control" parent="Actions"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -85,7 +98,7 @@ margin_top = -569.7
 margin_right = 437.5
 margin_bottom = 305.3
 
-[node name="L" type="TextureButton" parent="Z/Actions"]
+[node name="L" type="TextureButton" parent="Actions/Menu"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -118.0
@@ -93,12 +106,12 @@ margin_right = 236.0
 margin_bottom = 118.0
 texture_normal = ExtResource( 3 )
 
-[node name="LU" type="TextureButton" parent="Z/Actions"]
+[node name="LU" type="TextureButton" parent="Actions/Menu"]
 margin_right = 236.0
 margin_bottom = 236.0
 texture_normal = ExtResource( 3 )
 
-[node name="U" type="TextureButton" parent="Z/Actions"]
+[node name="U" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -118.0
@@ -106,14 +119,14 @@ margin_right = 118.0
 margin_bottom = 236.0
 texture_normal = ExtResource( 3 )
 
-[node name="UR" type="TextureButton" parent="Z/Actions"]
+[node name="UR" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -236.0
 margin_bottom = 236.0
 texture_normal = ExtResource( 3 )
 
-[node name="R" type="TextureButton" parent="Z/Actions"]
+[node name="R" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -123,7 +136,7 @@ margin_top = -118.0
 margin_bottom = 118.0
 texture_normal = ExtResource( 3 )
 
-[node name="DR" type="TextureButton" parent="Z/Actions"]
+[node name="DR" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -132,7 +145,7 @@ margin_left = -236.0
 margin_top = -236.0
 texture_normal = ExtResource( 3 )
 
-[node name="D" type="TextureButton" parent="Z/Actions"]
+[node name="D" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -142,12 +155,12 @@ margin_top = -236.0
 margin_right = 118.0
 texture_normal = ExtResource( 3 )
 
-[node name="LD" type="TextureButton" parent="Z/Actions"]
+[node name="LD" type="TextureButton" parent="Actions/Menu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -236.0
 margin_right = 236.0
 texture_normal = ExtResource( 3 )
 
-[node name="Anim" type="AnimationPlayer" parent="Z/Actions"]
+[node name="Anim" type="AnimationPlayer" parent="Actions/Menu"]
 anims/In = SubResource( 2 )
