@@ -85,6 +85,7 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="Actions" type="Node2D" parent="."]
+editor/display_folded = true
 visible = false
 z_index = 4096
 

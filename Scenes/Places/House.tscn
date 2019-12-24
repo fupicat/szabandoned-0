@@ -6,15 +6,15 @@
 [ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=5]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 50
 font_data = ExtResource( 5 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
 Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -39,6 +39,7 @@ position = Vector2( 3149.61, 1287.24 )
 collision/safe_margin = 0.8
 
 [node name="Grama" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 2838.04 )
 __meta__ = {
 "_edit_lock_": true
@@ -56,13 +57,13 @@ polygon = PoolVector2Array( 3506.58, -1789.35, -3408.04, -1789.35, -3409.11, 180
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grama/PlacentDown"]
 position = Vector2( 0, -1785.99 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="PlacentUp" type="Area2D" parent="Grama"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grama/PlacentUp"]
 position = Vector2( 41.041, 1798.36 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
 editor/display_folded = true
@@ -71,7 +72,7 @@ script = ExtResource( 4 )
 [node name="UI" type="Control" parent="HouseUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 2 )
+theme = SubResource( 3 )
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
