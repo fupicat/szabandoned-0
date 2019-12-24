@@ -14,7 +14,7 @@ func _physics_process(delta):
     var xdir = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
     move.x = lerp(move.x, (SPEED + run) * xdir, SLIP)
     
-    move_and_slide(move)
+    move_and_slide(move, Vector2(0, -1))
 
 func _input(event):
     if event.is_action_pressed("action"):

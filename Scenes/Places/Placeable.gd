@@ -18,8 +18,7 @@ func update_z():
 func _input(event):
     if event.is_action_pressed("action"):
         if move:
-            move = false
-            $Col.disabled = false
+            place()
 
 func _on_Interactive_body_entered(body):
     if body == get_parent().get_node("Player"):
@@ -28,3 +27,7 @@ func _on_Interactive_body_entered(body):
 func _on_Interactive_body_exited(body):
     if body == get_parent().get_node("Player"):
         on_me = false
+
+func place():
+    move = false
+    $Col.disabled = false
