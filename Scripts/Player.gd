@@ -18,7 +18,7 @@ func _physics_process(delta):
 
 func _input(event):
     if event.is_action_pressed("action"):
-        var inters = get_tree().get_nodes_in_group("Interactable")
+        var inters = get_tree().get_nodes_in_group("Interactive")
         if len(inters) > 0:
             var onmes = []
             var upper = null

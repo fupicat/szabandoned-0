@@ -34,14 +34,11 @@ shape = SubResource( 1 )
 [node name="Wall" type="Area2D" parent="." groups=[
 "Wall",
 ]]
-editor/display_folded = true
 position = Vector2( 0, -381.549 )
 script = ExtResource( 3 )
 
 [node name="WallCol" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 2 )
-
-[node name="Objects" type="Node2D" parent="Wall"]
 
 [node name="Interactive" type="Area2D" parent="."]
 editor/display_folded = true

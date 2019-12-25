@@ -1,7 +1,5 @@
 extends Node2D
 
-#Talvez: Criar area2D com a shape do obj e ver se overlapa. Se overlapeando.x > eu.x, eu.x -= 1 até não overlapear sacou?
-
 var old_xy = Vector2(0, 0)
 var old_col = null
 var edit_mode = false
@@ -19,12 +17,6 @@ func _physics_process(delta):
         $Player.position.y += 10
     if edit_mode and !place_up:
         $Player.position.y -= 10
-
-func _input(event):
-    if event.is_action_pressed("1"):
-        switch_edit_mode()
-    if event.is_action_pressed("2"):
-        add_placeable(load("res://Scenes/Placeables/SmallRoom.tscn"))
 
 func switch_edit_mode(): # Returns true if switched.
     if edit_mode:
@@ -46,11 +38,15 @@ func switch_edit_mode(): # Returns true if switched.
             node.get_node("Col").disabled = true
     return true
 
-func add_placeable(var scene):
+func add_placeable(var scene, var collision = true):
+    $Player/CollisionShape2D.disabled = false
     obj = scene.instance()
     add_child(obj)
     obj.get_node("Col").disabled = true
-    $Player/CollisionShape2D.shape = obj.get_node("Col").shape
+    if collision:
+        $Player/CollisionShape2D.shape = obj.get_node("Col").shape
+    else:
+        $Player/CollisionShape2D.disabled = true
     obj.move = true
 
 func _on_Placent_body_entered(body):

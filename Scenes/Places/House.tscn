@@ -66,7 +66,6 @@ position = Vector2( 41.041, 1798.36 )
 shape = SubResource( 1 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="UI" type="Control" parent="HouseUI"]
@@ -89,213 +88,24 @@ margin_top = -106.0
 scroll_vertical_enabled = false
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
-margin_right = 9537.0
-margin_bottom = 94.0
+margin_right = 488.0
+margin_bottom = 106.0
 size_flags_vertical = 3
 
 [node name="SmallRoom" type="Button" parent="HouseUI/UI/Items/H"]
 margin_right = 325.0
-margin_bottom = 94.0
+margin_bottom = 106.0
 text = "Small Room"
 
-[node name="SmallRoom2" type="Button" parent="HouseUI/UI/Items/H"]
+[node name="Clock" type="Button" parent="HouseUI/UI/Items/H"]
 margin_left = 329.0
-margin_right = 654.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom3" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 658.0
-margin_right = 983.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom4" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 987.0
-margin_right = 1312.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom5" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 1316.0
-margin_right = 1641.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom6" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 1645.0
-margin_right = 1970.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom7" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 1974.0
-margin_right = 2299.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom8" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 2303.0
-margin_right = 2628.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom9" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 2632.0
-margin_right = 2957.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom10" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 2961.0
-margin_right = 3286.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom11" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 3290.0
-margin_right = 3615.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom12" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 3619.0
-margin_right = 3944.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom13" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 3948.0
-margin_right = 4273.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom14" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 4277.0
-margin_right = 4602.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom15" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 4606.0
-margin_right = 4931.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom16" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 4935.0
-margin_right = 5260.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom17" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 5264.0
-margin_right = 5589.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom18" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 5593.0
-margin_right = 5918.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom19" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 5922.0
-margin_right = 6247.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom20" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 6251.0
-margin_right = 6576.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom21" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 6580.0
-margin_right = 6905.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom22" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 6909.0
-margin_right = 7234.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom23" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 7238.0
-margin_right = 7563.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom24" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 7567.0
-margin_right = 7892.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom25" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 7896.0
-margin_right = 8221.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom26" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 8225.0
-margin_right = 8550.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom27" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 8554.0
-margin_right = 8879.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom28" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 8883.0
-margin_right = 9208.0
-margin_bottom = 94.0
-text = "Small Room"
-
-[node name="SmallRoom29" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 9212.0
-margin_right = 9537.0
-margin_bottom = 94.0
-text = "Small Room"
+margin_right = 488.0
+margin_bottom = 106.0
+text = "Clock"
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom2" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom3" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom4" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom5" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom6" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom7" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom8" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom9" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom10" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom11" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom12" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom13" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom14" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom15" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom16" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom17" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom18" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom19" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom20" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom21" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom22" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom23" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom24" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom25" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom26" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom27" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom28" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom29" to="HouseUI" method="_on_SmallRoom_pressed"]
+[connection signal="pressed" from="HouseUI/UI/Items/H/Clock" to="HouseUI" method="_on_Clock_pressed"]
