@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -26,9 +26,6 @@ Button/styles/focus = null
 Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
-
-[sub_resource type="CircleShape2D" id=4]
-radius = 78.6428
 
 [node name="House" type="Node2D"]
 script = ExtResource( 1 )
@@ -69,7 +66,6 @@ position = Vector2( 41.041, 1798.36 )
 shape = SubResource( 1 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="UI" type="Control" parent="HouseUI"]
@@ -92,7 +88,7 @@ margin_top = -106.0
 scroll_vertical_enabled = false
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
-margin_right = 488.0
+margin_right = 325.0
 margin_bottom = 106.0
 size_flags_vertical = 3
 
@@ -100,22 +96,9 @@ size_flags_vertical = 3
 margin_right = 325.0
 margin_bottom = 106.0
 text = "Small Room"
-
-[node name="Clock" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 329.0
-margin_right = 488.0
-margin_bottom = 106.0
-text = "Clock"
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 1916.67, 1605.42 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Items/H/Clock" to="HouseUI" method="_on_Clock_pressed"]
