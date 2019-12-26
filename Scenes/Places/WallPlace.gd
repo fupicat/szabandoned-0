@@ -1,19 +1,22 @@
 extends Area2D
 
 var move = false
+var areas = []
 
 func _ready():
     update_z()
 
 func _physics_process(delta):
+    areas = get_overlapping_areas()
+    print(areas)
     if move:
         global_position = get_parent().get_node("Player").global_position
         update_z()
 
 func update_z():
-    for node in get_overlapping_areas():
+    for node in areas:
         if get_tree().get_nodes_in_group("Wall").has(node):
-            z_index = node.z_index
+            z_index = node.z_index + 1
 
 func _input(event):
     if event.is_action_pressed("action"):
@@ -21,15 +24,12 @@ func _input(event):
             place()
 
 func place():
-    var wall = null
-    for node in get_overlapping_areas():
+    var wall = false
+    print(areas)
+    for node in areas:
         if get_tree().get_nodes_in_group("Wall").has(node):
-            wall = node
-    if wall != null:
+            wall = true
+    if wall:
         move = false
-        var selfdup = $".".duplicate().instance()
-        wall.add_child(selfdup)
-        selfdup.global_position = global_position
-        selfdup.z_index = 0
-        get_parent().get_node("Player").global_position = Vector2(3149.61, 1287.24)
-        queue_free()
+    print(wall)
+    return wall

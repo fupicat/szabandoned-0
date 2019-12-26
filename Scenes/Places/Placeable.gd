@@ -31,3 +31,4 @@ func _on_Interactive_body_exited(body):
 func place():
     move = false
     $Col.disabled = false
+    return true

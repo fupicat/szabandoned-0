@@ -32,4 +32,3 @@ func _input(event):
                         if node.z_index > upper.z_index:
                             upper = node
                 print(upper)
-        print("Done")

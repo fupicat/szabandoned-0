@@ -20,15 +20,18 @@ func _physics_process(delta):
 
 func switch_edit_mode(): # Returns true if switched.
     if edit_mode:
+        var cant = false
         for node in get_tree().get_nodes_in_group("Interactable"):
-            if node.move:
-                node.move = false
-            node.get_node("Col").disabled = false
-        edit_mode = false
-        $Player.global_position = old_xy
-        $Player/CollisionShape2D.shape = old_col
-        $Player.show()
-        $Player/CollisionShape2D.disabled = false
+            if !node.place():
+                cant = true
+        if cant:
+            print("One of the items could not be placed.")
+        else:
+            edit_mode = false
+            $Player.global_position = old_xy
+            $Player/CollisionShape2D.shape = old_col
+            $Player.show()
+            $Player/CollisionShape2D.disabled = false
     else:
         edit_mode = true
         old_xy = $Player.global_position
