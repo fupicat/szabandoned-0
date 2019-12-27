@@ -15,11 +15,6 @@ func _physics_process(delta):
 func update_z():
     z_index = global_position.y / 10
 
-func _input(event):
-    if event.is_action_pressed("action"):
-        if move:
-            place()
-
 func _on_Interactive_body_entered(body):
     if body == get_parent().get_node("Player"):
         on_me = true

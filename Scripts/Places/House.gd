@@ -18,6 +18,10 @@ func _physics_process(delta):
     if edit_mode and !place_up:
         $Player.position.y -= 10
 
+func _input(event):
+    if (event.is_action_pressed("action") and edit_mode) or event.is_action_pressed("mode"):
+        switch_edit_mode()
+
 func switch_edit_mode(): # Returns true if switched.
     if edit_mode:
         var cant = false
@@ -26,17 +30,23 @@ func switch_edit_mode(): # Returns true if switched.
                 cant = true
         if cant:
             print("One of the items could not be placed.")
-        else:
-            edit_mode = false
-            $Player.global_position = old_xy
-            $Player/CollisionShape2D.shape = old_col
-            $Player.show()
-            $Player/CollisionShape2D.disabled = false
+            return false
+        
+        $HouseUI/UI/Mode.text = "Edit Mode"
+        $HouseUI/UI/Items.hide()
+        edit_mode = false
+        $Player.global_position = old_xy
+        $Player/CollisionShape2D.shape = old_col
+        $Player.show()
+        $Player/CollisionShape2D.disabled = false
     else:
+        $HouseUI/UI/Mode.text = "Accept"
+        $HouseUI/UI/Items.show()
         edit_mode = true
         old_xy = $Player.global_position
         old_col = $Player/CollisionShape2D.shape
         $Player.hide()
+        $HouseUI/UI/Items.show()
         for node in get_tree().get_nodes_in_group("Interactable"):
             node.get_node("Col").disabled = true
     return true
@@ -51,6 +61,7 @@ func add_placeable(var scene, var collision = true):
     else:
         $Player/CollisionShape2D.disabled = true
     obj.move = true
+    $HouseUI/UI/Items.hide()
 
 func _on_Placent_body_entered(body):
     if body == $Player and edit_mode:
