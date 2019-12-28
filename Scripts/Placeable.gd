@@ -24,6 +24,8 @@ func _on_Interactive_body_exited(body):
         on_me = false
 
 func place():
+    if get_parent().get_node('Grama/Path').get_overlapping_bodies().has(get_parent().get_node('Player')):
+        return false
     move = false
     $Col.disabled = false
     return true

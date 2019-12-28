@@ -1,20 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Grama.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=4]
-[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=5]
+[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 50
-font_data = ExtResource( 5 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 515.904, 215.157 )
 
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -39,7 +43,6 @@ position = Vector2( 3149.61, 1287.24 )
 collision/safe_margin = 0.8
 
 [node name="Grama" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 2838.04 )
 __meta__ = {
 "_edit_lock_": true
@@ -65,13 +68,33 @@ shape = SubResource( 1 )
 position = Vector2( 41.041, 1798.36 )
 shape = SubResource( 1 )
 
+[node name="Path" type="Area2D" parent="Grama"]
+editor/display_folded = true
+position = Vector2( 2617.2, -1514.01 )
+z_index = -4095
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Grama/Path"]
+modulate = Color( 0.4, 0.309804, 0.0196078, 1 )
+margin_right = 956.0
+margin_bottom = 453.0
+texture = ExtResource( 4 )
+patch_margin_left = 45
+patch_margin_top = 45
+patch_margin_right = 45
+patch_margin_bottom = 45
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grama/Path"]
+position = Vector2( 531.267, 231.481 )
+shape = SubResource( 2 )
+
 [node name="HouseUI" type="CanvasLayer" parent="."]
-script = ExtResource( 4 )
+editor/display_folded = true
+script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 3 )
+theme = SubResource( 4 )
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
