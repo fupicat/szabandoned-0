@@ -39,7 +39,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3149.61, 1287.24 )
+position = Vector2( 3195.15, 1522.52 )
 collision/safe_margin = 0.8
 
 [node name="Grama" type="StaticBody2D" parent="."]

@@ -39,6 +39,7 @@ func switch_edit_mode(): # Returns true if switched.
         $Player/CollisionShape2D.shape = old_col
         $Player.show()
         $Player/CollisionShape2D.disabled = false
+        $Player.position = Vector2(3195, 1522)
     else:
         $HouseUI/UI/Mode.text = "Accept"
         $HouseUI/UI/Items.show()
