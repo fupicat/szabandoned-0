@@ -21,6 +21,18 @@ func _physics_process(delta):
 func _input(event):
     if (event.is_action_pressed("action") and edit_mode) or event.is_action_pressed("mode"):
         switch_edit_mode()
+    if event.is_action_pressed('ui_page_up'):
+        var tocando = []
+        for node in get_tree().get_nodes_in_group('Interactable'):
+            if node.on_me:
+                tocando.append(node)
+        var movethis = null
+        for node in tocando:
+            if movethis == null or node.z_index > movethis.z_index:
+                movethis = node
+        
+        switch_edit_mode()
+        movethis.move = true
 
 func switch_edit_mode(): # Returns true if switched.
     if edit_mode:

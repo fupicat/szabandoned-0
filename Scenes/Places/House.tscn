@@ -43,6 +43,7 @@ position = Vector2( 3195.15, 1522.52 )
 collision/safe_margin = 0.8
 
 [node name="Grama" type="StaticBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 2838.04 )
 __meta__ = {
 "_edit_lock_": true
