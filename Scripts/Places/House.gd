@@ -3,6 +3,7 @@ extends Node2D
 var old_xy = Vector2(0, 0)
 var old_col = null
 var edit_mode = false
+var move_mode = false
 var obj = null
 var place_up = true
 var place_down = true
@@ -19,20 +20,11 @@ func _physics_process(delta):
         $Player.position.y -= 10
 
 func _input(event):
-    if (event.is_action_pressed("action") and edit_mode) or event.is_action_pressed("mode"):
+    if (event.is_action_pressed("action") and edit_mode and !move_mode) or event.is_action_pressed("mode"):
         switch_edit_mode()
-    if event.is_action_pressed('ui_page_up'):
-        var tocando = []
-        for node in get_tree().get_nodes_in_group('Interactable'):
-            if node.on_me:
-                tocando.append(node)
-        var movethis = null
-        for node in tocando:
-            if movethis == null or node.z_index > movethis.z_index:
-                movethis = node
+    if event.is_action_pressed('action') and move_mode:
+        move_obj()
         
-        switch_edit_mode()
-        movethis.move = true
 
 func switch_edit_mode(): # Returns true if switched.
     if edit_mode:
@@ -44,7 +36,7 @@ func switch_edit_mode(): # Returns true if switched.
             print("One of the items could not be placed.")
             return false
         
-        $HouseUI/UI/Mode.text = "Edit Mode"
+        $HouseUI/UI/Mode.text = "Add Item"
         $HouseUI/UI/Items.hide()
         edit_mode = false
         $Player.global_position = old_xy
@@ -52,6 +44,8 @@ func switch_edit_mode(): # Returns true if switched.
         $Player.show()
         $Player/CollisionShape2D.disabled = false
         $Player.position = Vector2(3195, 1522)
+        $HouseUI/UI/Move.show()
+        move_mode = false
     else:
         $HouseUI/UI/Mode.text = "Accept"
         $HouseUI/UI/Items.show()
@@ -62,6 +56,12 @@ func switch_edit_mode(): # Returns true if switched.
         $HouseUI/UI/Items.show()
         for node in get_tree().get_nodes_in_group("Interactable"):
             node.get_node("Col").disabled = true
+        
+        if move_mode:
+            $HouseUI/UI/Items.hide()
+            $Player.show()
+        $HouseUI/UI/Move.hide()
+            
     return true
 
 func add_placeable(var scene, var collision = true):
@@ -91,3 +91,18 @@ func _on_PlacentUp_body_entered(body):
 func _on_PlacentUp_body_exited(body):
     if body == $Player and edit_mode:
         place_up = true
+
+func move_obj():
+    var tocando = []
+    for node in get_tree().get_nodes_in_group('Interactable'):
+        if node.on_me:
+            tocando.append(node)
+    var movethis = null
+    for node in tocando:
+        if movethis == null or node.z_index > movethis.z_index:
+            movethis = node
+    
+    if movethis != null:
+        $Player.hide()
+        move_mode = false
+        movethis.move = true
