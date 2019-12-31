@@ -14,21 +14,32 @@ func _physics_process(delta):
     var xdir = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
     move.x = lerp(move.x, (SPEED + run) * xdir, SLIP)
     
+    if xdir == 1:
+        $Scrat.scale.x = 1
+    elif xdir == -1:
+        $Scrat.scale.x = -1
+    
     move_and_slide(move, Vector2(0, -1))
 
 func _input(event):
-    if event.is_action_pressed("action"):
-        var inters = get_tree().get_nodes_in_group("Interactive")
+    if event.is_action_pressed("action") and !get_parent().edit_mode:
+        var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
             var onmes = []
             var upper = null
             for node in inters: # Get all interactable nodes and detect which ones the player is touching.
                 if node.on_me:
                     onmes.append(node)
-            if len(onmes) > 0:
-                upper = onmes[0]
-                if len(onmes) > 1:
-                    for node in onmes: # Get all nodes the player is touching and gets the one with the highest z_index.
-                        if node.z_index > upper.z_index:
-                            upper = node
-                print(upper)
+            var lookings = []
+            print('onmes = ' + str(onmes))
+            for node in onmes: # Get all nodes the player is looking at.
+                if ($Scrat.scale.x > 0 and node.global_position.x > global_position.x) or ($Scrat.scale.x < 0 and node.global_position.x < global_position.x):
+                    lookings.append(node)
+            if len(lookings) > 0:
+                upper = lookings[0]
+                print('lookings = ' + str(lookings))
+                for node in lookings:
+                    if node.z_index > upper.z_index:
+                        upper = node
+                print('upper = ' + str(upper))
+                upper.modulate = Color(1, 0, 0)
