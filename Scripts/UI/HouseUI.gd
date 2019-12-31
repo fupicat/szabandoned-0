@@ -12,3 +12,6 @@ func _on_SmallRoom_pressed():
 func _on_Move_pressed():
     get_parent().move_mode = true
     get_parent().switch_edit_mode()
+
+func _on_Sofa_pressed():
+    get_parent().add_placeable(load("res://Scenes/Placeables/Sofa.tscn"))

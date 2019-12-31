@@ -7,19 +7,16 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 737.784, 64.2883 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 732.022, 369.606 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 731.515, 554.104 )
 
 [node name="SmallRoom" type="StaticBody2D" groups=[
 "Interactable",
 ]]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 interact = [ "move", "delete" ]
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -36,14 +33,13 @@ position = Vector2( 0, -381.549 )
 script = ExtResource( 3 )
 
 [node name="WallCol" type="CollisionShape2D" parent="Wall"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Interactive" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( -0.160816, 569.066 )
 
 [node name="Col" type="CollisionShape2D" parent="Interactive"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 [connection signal="body_entered" from="Wall" to="Wall" method="_on_body_entered"]
 [connection signal="body_exited" from="Wall" to="Wall" method="_on_body_exited"]
 [connection signal="body_entered" from="Interactive" to="." method="_on_Interactive_body_entered"]

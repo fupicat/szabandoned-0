@@ -120,14 +120,21 @@ margin_top = -106.0
 scroll_vertical_enabled = false
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
-margin_right = 325.0
+margin_right = 466.0
 margin_bottom = 106.0
 size_flags_vertical = 3
+custom_constants/separation = 10
 
 [node name="SmallRoom" type="Button" parent="HouseUI/UI/Items/H"]
 margin_right = 325.0
 margin_bottom = 106.0
 text = "Small Room"
+
+[node name="Sofa" type="Button" parent="HouseUI/UI/Items/H"]
+margin_left = 335.0
+margin_right = 466.0
+margin_bottom = 106.0
+text = "Sofa"
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]
@@ -135,3 +142,4 @@ text = "Small Room"
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
+[connection signal="pressed" from="HouseUI/UI/Items/H/Sofa" to="HouseUI" method="_on_Sofa_pressed"]
