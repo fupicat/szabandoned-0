@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Puppet.png" type="Texture" id=2]
-[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/UI/ActionsUI.gd" type="Script" id=3]
+[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54.3453, 26.4223 )
@@ -11,7 +12,7 @@ extents = Vector2( 54.3453, 26.4223 )
 resource_name = "In"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_size")
+tracks/0/path = NodePath("./Menu:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -23,7 +24,7 @@ tracks/0/keys = {
 "values": [ Vector2( 236, 236 ), Vector2( 875, 875 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rect_position")
+tracks/1/path = NodePath("./Menu:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -35,7 +36,7 @@ tracks/1/keys = {
 "values": [ Vector2( -118, -250.2 ), Vector2( -437.5, -569.7 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("./Menu:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -47,7 +48,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("..:visible")
+tracks/3/path = NodePath(".:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -85,11 +86,12 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="Actions" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 z_index = 4096
+script = ExtResource( 3 )
 
 [node name="Menu" type="Control" parent="Actions"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -105,27 +107,7 @@ anchor_bottom = 0.5
 margin_top = -118.0
 margin_right = 236.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 3 )
-
-[node name="LU" type="TextureButton" parent="Actions/Menu"]
-margin_right = 236.0
-margin_bottom = 236.0
-texture_normal = ExtResource( 3 )
-
-[node name="U" type="TextureButton" parent="Actions/Menu"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -118.0
-margin_right = 118.0
-margin_bottom = 236.0
-texture_normal = ExtResource( 3 )
-
-[node name="UR" type="TextureButton" parent="Actions/Menu"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -236.0
-margin_bottom = 236.0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
 
 [node name="R" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
@@ -135,16 +117,15 @@ anchor_bottom = 0.5
 margin_left = -236.0
 margin_top = -118.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
 
-[node name="DR" type="TextureButton" parent="Actions/Menu"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -236.0
-margin_top = -236.0
-texture_normal = ExtResource( 3 )
+[node name="U" type="TextureButton" parent="Actions/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -118.0
+margin_right = 118.0
+margin_bottom = 236.0
+texture_normal = ExtResource( 4 )
 
 [node name="D" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
@@ -154,14 +135,35 @@ anchor_bottom = 1.0
 margin_left = -118.0
 margin_top = -236.0
 margin_right = 118.0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
+
+[node name="LU" type="TextureButton" parent="Actions/Menu"]
+margin_right = 236.0
+margin_bottom = 236.0
+texture_normal = ExtResource( 4 )
+
+[node name="UR" type="TextureButton" parent="Actions/Menu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -236.0
+margin_bottom = 236.0
+texture_normal = ExtResource( 4 )
+
+[node name="DR" type="TextureButton" parent="Actions/Menu"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -236.0
+margin_top = -236.0
+texture_normal = ExtResource( 4 )
 
 [node name="LD" type="TextureButton" parent="Actions/Menu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -236.0
 margin_right = 236.0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
 
-[node name="Anim" type="AnimationPlayer" parent="Actions/Menu"]
+[node name="Anim" type="AnimationPlayer" parent="Actions"]
 anims/In = SubResource( 2 )

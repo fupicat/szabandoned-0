@@ -5,14 +5,16 @@ const SPEED = 400
 const RUNADD = 400
 const SLIP = 0.20
 
+var can_walk = true
+
 func _physics_process(delta):
     z_index = global_position.y / 10
     var run = RUNADD * int(Input.is_action_pressed("run"))
     var ydir = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
-    move.y = lerp(move.y, (SPEED + run) * ydir, SLIP)
+    move.y = lerp(move.y, (SPEED + run) * ydir, SLIP) * int(can_walk)
     
     var xdir = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
-    move.x = lerp(move.x, (SPEED + run) * xdir, SLIP)
+    move.x = lerp(move.x, (SPEED + run) * xdir, SLIP) * int(can_walk)
     
     if xdir == 1:
         $Scrat.scale.x = 1
@@ -42,4 +44,5 @@ func _input(event):
                     if node.z_index > upper.z_index:
                         upper = node
                 print('upper = ' + str(upper))
-                upper.modulate = Color(1, 0, 0)
+                if len(upper.interact) > 0:
+                    $Actions.menu(upper, upper.interact)
