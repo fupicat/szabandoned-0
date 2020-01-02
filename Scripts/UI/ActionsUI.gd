@@ -45,6 +45,9 @@ func _process(delta):
         get_node('Menu/' + active).modulate = Color(0.215686, 0.219608, 1)
 
 func _input(event):
-    if event.is_action_pressed("action"):
+    if event.is_action_pressed("action") and select:
         if active != '':
-            print(the_actions[get_node('Menu/' + active).get_position_in_parent()])
+            get_parent().get_parent().call(the_actions[get_node('Menu/' + active).get_position_in_parent()], the_obj)
+        get_parent().can_walk = true
+        select = false
+        hide()

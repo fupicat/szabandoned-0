@@ -8,6 +8,8 @@ var obj = null
 var place_up = true
 var place_down = true
 
+var action_obj = null
+
 func _ready():
     $Player/Camera2D.limit_left = -3500
     $Player/Camera2D.limit_right = 3500
@@ -106,3 +108,23 @@ func move_obj():
         $Player.hide()
         move_mode = false
         movethis.move = true
+
+# Actions
+
+func Rotate(var upper):
+    var path = upper.get_node('Sprite').texture.resource_path
+    if path.ends_with('Side.png'):
+        path = path.replace('Side.png', '')
+        if upper.scale.x == 1:
+            upper.get_node('Sprite').texture = load(path + 'Front.png')
+        if upper.scale.x == -1:
+            upper.scale.x = 1
+            upper.get_node('Sprite').texture = load(path + 'Back.png')
+    elif path.ends_with('Front.png'):
+        path = path.replace('Front.png', '')
+        upper.scale.x = -1
+        upper.get_node('Sprite').texture = load(path + 'Side.png')
+    elif path.ends_with('Back.png'):
+        path = path.replace('Back.png', '')
+        upper.scale.x = 1
+        upper.get_node('Sprite').texture = load(path + 'Side.png')

@@ -24,7 +24,7 @@ func _physics_process(delta):
     move_and_slide(move, Vector2(0, -1))
 
 func _input(event):
-    if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.select:
+    if event.is_action_pressed("action") and !get_parent().edit_mode:
         var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
             var onmes = []
@@ -33,16 +33,13 @@ func _input(event):
                 if node.on_me:
                     onmes.append(node)
             var lookings = []
-            print('onmes = ' + str(onmes))
             for node in onmes: # Get all nodes the player is looking at.
-                if ($Scrat.scale.x > 0 and node.global_position.x > global_position.x) or ($Scrat.scale.x < 0 and node.global_position.x < global_position.x):
+                if ($Scrat.scale.x > 0 and node.global_position.x > global_position.x) or ($Scrat.scale.x < 0 and node.global_position.x < global_position.x) and !$Actions.visible:
                     lookings.append(node)
             if len(lookings) > 0:
                 upper = lookings[0]
-                print('lookings = ' + str(lookings))
                 for node in lookings:
                     if node.z_index > upper.z_index:
                         upper = node
-                print('upper = ' + str(upper))
                 if len(upper.interact) > 0:
                     $Actions.menu(upper, upper.interact)

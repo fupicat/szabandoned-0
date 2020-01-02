@@ -7,7 +7,7 @@
 extents = Vector2( 113.752, 35.162 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 124.25, 42.559 )
+extents = Vector2( 124.25, 46.8485 )
 
 [node name="Sofa" type="StaticBody2D" groups=[
 "Interactable",
