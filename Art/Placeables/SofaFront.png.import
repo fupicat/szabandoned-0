@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sofa.png-92186d31793234e17e5c1554e060468c.stex"
+path="res://.import/SofaFront.png-19c0a613bd5bb58c52a7d47c91616eb2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeables/Sofa.png"
-dest_files=[ "res://.import/Sofa.png-92186d31793234e17e5c1554e060468c.stex" ]
+source_file="res://Art/Placeables/SofaFront.png"
+dest_files=[ "res://.import/SofaFront.png-19c0a613bd5bb58c52a7d47c91616eb2.stex" ]
 
 [params]
 

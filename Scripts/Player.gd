@@ -24,7 +24,7 @@ func _physics_process(delta):
     move_and_slide(move, Vector2(0, -1))
 
 func _input(event):
-    if event.is_action_pressed("action") and !get_parent().edit_mode:
+    if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.select:
         var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
             var onmes = []
