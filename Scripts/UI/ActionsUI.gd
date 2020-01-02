@@ -2,6 +2,7 @@ extends Node2D
 
 var active = ''
 var select = false
+var phantom_select = false
 var the_obj = null
 var the_actions = []
 
@@ -22,6 +23,7 @@ func menu(var object, var actions):
     $Anim.stop()
     active = ''
     select = true
+    phantom_select = true
     $Anim.play("In")
 
 func _process(delta):
@@ -51,3 +53,7 @@ func _input(event):
         get_parent().can_walk = true
         select = false
         hide()
+        $Timer.start()
+
+func _on_Timer_timeout():
+    phantom_select = false
