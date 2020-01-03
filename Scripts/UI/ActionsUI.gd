@@ -53,6 +53,8 @@ func _input(event):
         select = false
         hide()
         $Timer.start()
+        if active == '':
+            get_parent().can_walk = true
 
 func _on_Timer_timeout():
     phantom_select = false
