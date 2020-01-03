@@ -128,3 +128,12 @@ func Rotate(var upper):
         path = path.replace('Back.png', '')
         upper.scale.x = 1
         upper.get_node('Sprite').texture = load(path + 'Side.png')
+    $Player.can_walk = true
+
+func Sit(var upper):
+    $Player.walk_to(upper)
+    $Player.connect('got_there', $".", "SitOn", [upper])
+
+func SitOn(var obj):
+    $Player.disconnect('got_there', $".", 'SitOn')
+    print('Sat on ' + str(obj))

@@ -6,6 +6,9 @@ const RUNADD = 400
 const SLIP = 0.20
 
 var can_walk = true
+var target = null
+
+signal got_there
 
 func _physics_process(delta):
     z_index = global_position.y / 10
@@ -20,8 +23,21 @@ func _physics_process(delta):
         $Scrat.scale.x = 1
     elif xdir == -1:
         $Scrat.scale.x = -1
+    if !can_walk:
+        if move.x > 0:
+            $Scrat.scale.x = 1
+        else:
+            $Scrat.scale.x = -1
+            
     
-    move_and_slide(move, Vector2(0, -1))
+    if target != null and !can_walk:
+        can_walk = false
+        move = (target - position).normalized() * (SPEED + RUNADD)
+        if (target - position).length() < 5:
+            target = null
+            emit_signal('got_there')
+    
+    move_and_slide(move)
 
 func _input(event):
     if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.phantom_select:
@@ -43,3 +59,8 @@ func _input(event):
                         upper = node
                 if len(upper.interact) > 0:
                     $Actions.menu(upper, upper.interact)
+
+func walk_to(var obj):
+    if obj.has_node('IntPos'):
+        $CollisionShape2D.disabled = true
+        target = obj.get_node('IntPos').global_position
