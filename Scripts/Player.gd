@@ -6,12 +6,14 @@ const RUNADD = 400
 const SLIP = 0.20
 
 var can_walk = true
+var can_animate = true
 var target = null
 
 signal got_there
 
 func _physics_process(delta):
-    z_index = global_position.y / 10
+    if can_walk:
+        z_index = global_position.y / 10
     var run = RUNADD * int(Input.is_action_pressed("run"))
     var ydir = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
     move.y = lerp(move.y, (SPEED + run) * ydir, SLIP) * int(can_walk)
@@ -28,16 +30,19 @@ func _physics_process(delta):
             $Scrat.scale.x = 1
         else:
             $Scrat.scale.x = -1
-            
     
     if target != null and !can_walk:
         can_walk = false
         move = (target - position).normalized() * (SPEED + RUNADD)
         if (target - position).length() < 5:
+            move = Vector2(0, 0)
+            global_position = target
             target = null
             emit_signal('got_there')
     
     move_and_slide(move)
+    
+    anim_walk()
 
 func _input(event):
     if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.phantom_select:
@@ -64,3 +69,14 @@ func walk_to(var obj):
     if obj.has_node('IntPos'):
         $CollisionShape2D.disabled = true
         target = obj.get_node('IntPos').global_position
+
+func anim_walk():
+    if can_animate:
+        if abs(move.x) < 5 and abs(move.y) < 5:
+            $Anim.play("Idle")
+        else:
+            $Anim.play("Walk")
+
+func animation(var name):
+    can_animate = false
+    $Anim.play(name)

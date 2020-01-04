@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Puppet.png" type="Texture" id=2]
@@ -60,16 +60,193 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -132.2 ), Vector2( 0, -124 ), Vector2( 0, -132.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scrat:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Scrat:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 0.95 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "SitFront"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -132.2 ), Vector2( -50.6742, -293.405 ), Vector2( -163.666, -149.885 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scrat:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.0, -20.8, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Scrat:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "SitLeft"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -132.2 ), Vector2( 80, -293.405 ), Vector2( 125, -149.885 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scrat:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Scrat:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "SitRight"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -132.2 ), Vector2( -50.6742, -293.405 ), Vector2( -124.475, -149.885 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Scrat:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.0, -20.8, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Scrat:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Walk"
+length = 0.26
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.26 ),
+"transitions": PoolRealArray( 0, 0, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -132.2 ), Vector2( 0, -160 ), Vector2( 0, -132.2 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision/safe_margin = 2.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Scrat" type="Sprite" parent="."]
-position = Vector2( 0, -132.2 )
+position = Vector2( -124.475, -149.885 )
+scale = Vector2( 1.16706, 0.839955 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -86,6 +263,7 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="Actions" type="Node2D" parent="."]
+editor/display_folded = true
 visible = false
 z_index = 4096
 script = ExtResource( 3 )
@@ -172,4 +350,11 @@ anims/In = SubResource( 2 )
 process_mode = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 3 )
+anims/SitFront = SubResource( 7 )
+anims/SitLeft = SubResource( 8 )
+anims/SitRight = SubResource( 4 )
+anims/Walk = SubResource( 9 )
 [connection signal="timeout" from="Actions/Timer" to="Actions" method="_on_Timer_timeout"]

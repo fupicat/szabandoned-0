@@ -136,4 +136,15 @@ func Sit(var upper):
 
 func SitOn(var obj):
     $Player.disconnect('got_there', $".", 'SitOn')
-    print('Sat on ' + str(obj))
+    var path = obj.get_node('Sprite').texture.resource_path
+    $Player.z_index = obj.z_index - 1
+    if path.ends_with('Side.png'):
+        if obj.scale.x == 1:
+            $Player.animation('SitRight')
+        else:
+            $Player.animation('SitLeft')
+    elif path.ends_with('Front.png'):
+        $Player.z_index = obj.z_index + 1
+        $Player.animation('SitFront')
+    elif path.ends_with('Back.png'):
+        $Player.animation('SitFront')
