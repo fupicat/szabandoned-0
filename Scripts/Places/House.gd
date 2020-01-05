@@ -112,6 +112,8 @@ func move_obj():
 # Actions
 
 func Rotate(var upper):
+    $Player/CollisionShape2D.disabled = false
+    $Player.disconnect('got_there', $".", 'Rotate')
     var path = upper.get_node('Sprite').texture.resource_path
     if path.ends_with('Side.png'):
         path = path.replace('Side.png', '')
@@ -130,12 +132,12 @@ func Rotate(var upper):
         upper.get_node('Sprite').texture = load(path + 'Side.png')
     $Player.can_walk = true
 
-func Sit(var upper):
+func walk2do(var upper, var action):
     $Player.walk_to(upper)
-    $Player.connect('got_there', $".", "SitOn", [upper])
+    $Player.connect('got_there', $".", action, [upper])
 
-func SitOn(var obj):
-    $Player.disconnect('got_there', $".", 'SitOn')
+func Sit(var obj):
+    $Player.disconnect('got_there', $".", 'Sit')
     var path = obj.get_node('Sprite').texture.resource_path
     $Player.z_index = obj.z_index - 1
     if path.ends_with('Side.png'):

@@ -34,7 +34,7 @@ func _physics_process(delta):
     if target != null and !can_walk:
         can_walk = false
         move = (target - position).normalized() * (SPEED + RUNADD)
-        if (target - position).length() < 5:
+        if (target - position).length() < 10:
             move = Vector2(0, 0)
             global_position = target
             target = null
@@ -45,7 +45,7 @@ func _physics_process(delta):
     anim_walk()
 
 func _input(event):
-    if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.phantom_select:
+    if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.phantom_select and can_walk:
         var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
             var onmes = []

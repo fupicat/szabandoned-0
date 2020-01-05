@@ -101,7 +101,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 0.95 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "SitFront"
 length = 0.7
 tracks/0/type = "value"
@@ -141,7 +141,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "SitLeft"
 length = 0.7
 tracks/0/type = "value"
@@ -181,8 +181,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "SitRight"
+[sub_resource type="Animation" id=6]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Scrat:position")
@@ -221,7 +220,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.789181, 1.11372 ), Vector2( 1.16706, 0.839955 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 resource_name = "Walk"
 length = 0.26
 loop = true
@@ -353,8 +352,8 @@ one_shot = true
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
-anims/SitFront = SubResource( 7 )
-anims/SitLeft = SubResource( 8 )
-anims/SitRight = SubResource( 4 )
-anims/Walk = SubResource( 9 )
+anims/SitFront = SubResource( 4 )
+anims/SitLeft = SubResource( 5 )
+anims/SitRight = SubResource( 6 )
+anims/Walk = SubResource( 7 )
 [connection signal="timeout" from="Actions/Timer" to="Actions" method="_on_Timer_timeout"]
