@@ -64,6 +64,8 @@ func _input(event):
                         upper = node
                 if len(upper.interact) > 0:
                     $Actions.menu(upper, upper.interact)
+    if event.is_action_pressed('run') and !can_animate and !can_walk:
+        cancel_action()
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
@@ -80,3 +82,9 @@ func anim_walk():
 func animation(var name):
     can_animate = false
     $Anim.play(name)
+
+func cancel_action():
+    target = null
+    can_animate = true
+    can_walk = true
+    $CollisionShape2D.disabled = false
