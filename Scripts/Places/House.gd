@@ -4,6 +4,7 @@ var old_xy = Vector2(0, 0)
 var old_col = null
 var edit_mode = false
 var move_mode = false
+var delete_mode = false
 var obj = null
 var place_up = true
 var place_down = true
@@ -22,10 +23,12 @@ func _physics_process(delta):
         $Player.position.y -= 10
 
 func _input(event):
-    if (event.is_action_pressed("action") and edit_mode and !move_mode) or event.is_action_pressed("mode"):
+    if (event.is_action_pressed("action") and edit_mode and !move_mode and !delete_mode) or event.is_action_pressed("mode"):
         switch_edit_mode()
     if event.is_action_pressed('action') and move_mode:
         move_obj()
+    if event.is_action_pressed("action") and delete_mode:
+        delete_obj()
         
 
 func switch_edit_mode(): # Returns true if switched.
@@ -47,7 +50,9 @@ func switch_edit_mode(): # Returns true if switched.
         $Player/CollisionShape2D.disabled = false
         $Player.position = Vector2(3195, 1522)
         $HouseUI/UI/Move.show()
+        $HouseUI/UI/Delete.show()
         move_mode = false
+        delete_mode = false
     else:
         $HouseUI/UI/Mode.text = "Accept"
         $HouseUI/UI/Items.show()
@@ -59,10 +64,11 @@ func switch_edit_mode(): # Returns true if switched.
         for node in get_tree().get_nodes_in_group("Interactable"):
             node.get_node("Col").disabled = true
         
-        if move_mode:
+        if move_mode or delete_mode:
             $HouseUI/UI/Items.hide()
             $Player.show()
         $HouseUI/UI/Move.hide()
+        $HouseUI/UI/Delete.hide()
             
     return true
 
@@ -108,6 +114,18 @@ func move_obj():
         $Player.hide()
         move_mode = false
         movethis.move = true
+
+func delete_obj():
+    var tocando = []
+    for node in get_tree().get_nodes_in_group('Interactable'):
+        if node.on_me:
+            tocando.append(node)
+    var delthis = null
+    for node in tocando:
+        if delthis == null or node.z_index > delthis.z_index:
+            delthis = node
+    if delthis != null:
+        delthis.queue_free()
 
 # Actions
 

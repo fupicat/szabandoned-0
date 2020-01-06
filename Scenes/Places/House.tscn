@@ -35,7 +35,7 @@ Button/styles/pressed = null
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
-"_edit_vertical_guides_": [  ]
+"_edit_vertical_guides_": [ 1913.0 ]
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -93,7 +93,6 @@ __meta__ = {
 }
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]
@@ -116,6 +115,15 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = 102.0
 text = "Move Item"
+
+[node name="Delete" type="Button" parent="HouseUI/UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -332.0
+margin_top = 122.65
+margin_right = -8.0
+margin_bottom = 216.65
+text = "Delete Item"
 
 [node name="Items" type="ScrollContainer" parent="HouseUI/UI"]
 anchor_top = 1.0
@@ -146,5 +154,6 @@ text = "Sofa"
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
+[connection signal="pressed" from="HouseUI/UI/Delete" to="HouseUI" method="_on_Delete_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/Sofa" to="HouseUI" method="_on_Sofa_pressed"]
