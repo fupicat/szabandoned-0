@@ -93,6 +93,7 @@ __meta__ = {
 }
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]

@@ -244,8 +244,7 @@ collision/safe_margin = 2.0
 script = ExtResource( 1 )
 
 [node name="Scrat" type="Sprite" parent="."]
-position = Vector2( -124.475, -149.885 )
-scale = Vector2( 1.16706, 0.839955 )
+position = Vector2( 0, -132.2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -351,6 +350,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
 anims/Idle = SubResource( 3 )
 anims/SitFront = SubResource( 4 )
 anims/SitLeft = SubResource( 5 )

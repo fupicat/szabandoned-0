@@ -15,6 +15,18 @@ func _ready():
     $Player/Camera2D.limit_left = -3500
     $Player/Camera2D.limit_right = 3500
     $Player/Camera2D.limit_bottom = 4720
+    if Global.house != []:
+        for item in Global.house:
+            var inst = load(item['file']).instance()
+            add_child(inst)
+            var posxy = item['pos'].replace('(', '').replace(')', '').replace(' ', '').split(',')
+            inst.global_position.x = float(posxy[0])
+            inst.global_position.y = float(posxy[1])
+            var scalexy = item['scale'].replace('(', '').replace(')', '').replace(' ', '').split(',')
+            inst.scale.x = float(scalexy[0])
+            inst.scale.y = float(scalexy[1])
+            inst.get_node('Sprite').texture = load(item['sprite'])
+            inst.update_z()
 
 func _physics_process(delta):
     if edit_mode and !place_down:
@@ -132,6 +144,9 @@ func delete_obj():
 func Rotate(var upper):
     $Player/CollisionShape2D.disabled = false
     $Player.disconnect('got_there', $".", 'Rotate')
+    
+    var prevscale = upper.scale.x
+    
     var path = upper.get_node('Sprite').texture.resource_path
     if path.ends_with('Side.png'):
         path = path.replace('Side.png', '')

@@ -21,6 +21,14 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="SZ"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+
+[debug]
+
+settings/crash_handler/message="Inclua isto quando for reportar o bug em https://github.com/godotengine/godot/issues"
+
 [display]
 
 window/size/width=1920
