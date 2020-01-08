@@ -26,7 +26,7 @@ func menu(var object, var actions):
     phantom_select = true
     $Anim.play("In")
 
-func _process(delta):
+func _process(_delta):
     if select == true:
         for node in $Menu.get_children():
             node.modulate = Color(1, 1, 1)

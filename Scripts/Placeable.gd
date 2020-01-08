@@ -1,18 +1,20 @@
 extends StaticBody2D
 
 var move = false
+#warning-ignore:UNUSED_CLASS_VARIABLE
 export var interact = []
 var on_me = false
 
 func _ready():
     update_z()
 
-func _physics_process(delta):
+func _physics_process(_delta):
     if move:
         global_position = Vector2(clamp(get_parent().get_node("Player").global_position.x, -3500, 3500), clamp(get_parent().get_node("Player").global_position.y, 1000, 4700))
         update_z()
 
 func update_z():
+    #warning-ignore:NARROWING_CONVERSION
     z_index = global_position.y / 10
 
 func _on_Interactive_body_entered(body):

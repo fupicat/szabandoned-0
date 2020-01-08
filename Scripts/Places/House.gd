@@ -9,8 +9,6 @@ var obj = null
 var place_up = true
 var place_down = true
 
-var action_obj = null
-
 func _ready():
     $Player/Camera2D.limit_left = -3500
     $Player/Camera2D.limit_right = 3500
@@ -28,7 +26,7 @@ func _ready():
             inst.get_node('Sprite').texture = load(item['sprite'])
             inst.update_z()
 
-func _physics_process(delta):
+func _physics_process(_delta):
     if edit_mode and !place_down:
         $Player.position.y += 10
     if edit_mode and !place_up:
@@ -145,8 +143,6 @@ func Rotate(var upper):
     $Player/CollisionShape2D.disabled = false
     $Player.disconnect('got_there', $".", 'Rotate')
     
-    var prevscale = upper.scale.x
-    
     var path = upper.get_node('Sprite').texture.resource_path
     if path.ends_with('Side.png'):
         path = path.replace('Side.png', '')
@@ -167,19 +163,19 @@ func Rotate(var upper):
 
 func walk2do(var upper, var action):
     $Player.walk_to(upper)
-    $Player.connect('got_there', $".", action, [upper])
+    var _err = $Player.connect('got_there', $".", action, [upper])
 
-func Sit(var obj):
+func Sit(var onwhat):
     $Player.disconnect('got_there', $".", 'Sit')
-    var path = obj.get_node('Sprite').texture.resource_path
-    $Player.z_index = obj.z_index - 1
+    var path = onwhat.get_node('Sprite').texture.resource_path
+    $Player.z_index = onwhat.z_index - 1
     if path.ends_with('Side.png'):
-        if obj.scale.x == 1:
+        if onwhat.scale.x == 1:
             $Player.animation('SitRight')
         else:
             $Player.animation('SitLeft')
     elif path.ends_with('Front.png'):
-        $Player.z_index = obj.z_index + 1
+        $Player.z_index = onwhat.z_index + 1
         $Player.animation('SitFront')
     elif path.ends_with('Back.png'):
         $Player.animation('SitFront')

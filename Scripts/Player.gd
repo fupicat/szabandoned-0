@@ -11,8 +11,9 @@ var target = null
 
 signal got_there
 
-func _physics_process(delta):
+func _physics_process(_delta):
     if can_walk:
+        #warning-ignore:NARROWING_CONVERSION
         z_index = global_position.y / 10
     var run = RUNADD * int(Input.is_action_pressed("run"))
     var ydir = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
@@ -40,7 +41,7 @@ func _physics_process(delta):
             target = null
             emit_signal('got_there')
     
-    move_and_slide(move)
+    move = move_and_slide(move)
     
     anim_walk()
 

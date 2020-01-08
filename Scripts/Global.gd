@@ -1,17 +1,13 @@
 extends Node
 
-var day = 1
-var month = 1
-var year = 1
-
 var house = []
 
 func _ready():
-    #var file = File.new()
-    #if file.file_exists("user://saves/save1.json"):
-    #    load_game()
-    #else:
-    #    save_game()
+    var file = File.new()
+    if file.file_exists("user://saves/save1.json"):
+        load_game()
+    else:
+        save_game()
     pass
 
 func _input(event):
@@ -40,4 +36,4 @@ func load_game():
     var loading = parse_json(file.get_as_text())
     file.close()
     house = loading['house']
-    get_tree().change_scene(loading['scene'])
+    var _err = get_tree().change_scene(loading['scene'])
