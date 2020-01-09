@@ -1,35 +1,18 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Grama.png" type="Texture" id=3]
 [ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=5]
-[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://SimpleTheme.tres" type="Theme" id=6]
+[ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 515.904, 215.157 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 50
-font_data = ExtResource( 6 )
-
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
-Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = null
-Button/styles/normal = null
-Button/styles/pressed = null
 
 [node name="House" type="Node2D"]
 script = ExtResource( 1 )
@@ -99,7 +82,7 @@ script = ExtResource( 5 )
 [node name="UI" type="Control" parent="HouseUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 4 )
+theme = ExtResource( 6 )
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
@@ -134,21 +117,23 @@ margin_top = -106.0
 scroll_vertical_enabled = false
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
-margin_right = 466.0
+margin_right = 442.0
 margin_bottom = 106.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="SmallRoom" type="Button" parent="HouseUI/UI/Items/H"]
-margin_right = 325.0
+margin_right = 313.0
 margin_bottom = 106.0
 text = "Small Room"
 
 [node name="Sofa" type="Button" parent="HouseUI/UI/Items/H"]
-margin_left = 335.0
-margin_right = 466.0
+margin_left = 323.0
+margin_right = 442.0
 margin_bottom = 106.0
 text = "Sofa"
+
+[node name="Pause" parent="." instance=ExtResource( 7 )]
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]

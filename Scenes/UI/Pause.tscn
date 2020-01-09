@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI/Pause.gd" type="Script" id=1]
+[ext_resource path="res://SimpleTheme.tres" type="Theme" id=2]
+
+[node name="Pause" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Pause" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.313726 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 10.0
+margin_right = -100.0
+margin_bottom = -10.0
+scroll_horizontal_enabled = false
+
+[node name="Bts" type="VBoxContainer" parent="Pause/ScrollContainer"]
+margin_top = 358.0
+margin_right = 1720.0
+margin_bottom = 702.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_constants/separation = 10
+
+[node name="Continue" type="Button" parent="Pause/ScrollContainer/Bts"]
+margin_right = 1720.0
+margin_bottom = 88.0
+text = "Continue"
+
+[node name="Man" type="HBoxContainer" parent="Pause/ScrollContainer/Bts"]
+margin_top = 98.0
+margin_right = 1720.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="Save" type="Button" parent="Pause/ScrollContainer/Bts/Man"]
+margin_right = 855.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+text = "Save Game"
+
+[node name="Load" type="Button" parent="Pause/ScrollContainer/Bts/Man"]
+margin_left = 865.0
+margin_right = 1720.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+text = "Load Game"
+
+[node name="Container" type="Container" parent="Pause/ScrollContainer/Bts"]
+margin_top = 196.0
+margin_right = 1720.0
+margin_bottom = 246.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Quit" type="Button" parent="Pause/ScrollContainer/Bts"]
+margin_top = 256.0
+margin_right = 1720.0
+margin_bottom = 344.0
+text = "Save and Quit"
+[connection signal="pressed" from="Pause/ScrollContainer/Bts/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Pause/ScrollContainer/Bts/Man/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Pause/ScrollContainer/Bts/Man/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Pause/ScrollContainer/Bts/Quit" to="." method="_on_Quit_pressed"]

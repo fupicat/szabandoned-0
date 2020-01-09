@@ -2,21 +2,21 @@ extends Node
 
 var house = []
 
+func _init():
+    pause_mode = Node.PAUSE_MODE_PROCESS
+
 func _ready():
     var file = File.new()
     if file.file_exists("user://saves/save1.json"):
         load_game()
     else:
         save_game()
-    pass
 
 func _input(event):
-    if event.is_action_pressed("ui_home"):
-        load_game()
-    if event.is_action_pressed('ui_page_up'):
-        save_game()
+    if event.is_action_pressed('pause'):
+        pause()
         
-func save_game():
+func save_game(var quit = false):
     house = []
     for node in get_tree().get_nodes_in_group('Interactable'):
         house.append({'file':node.filename, 'pos':node.global_position, 'sprite':node.get_node('Sprite').texture.resource_path, 'scale':node.scale})
@@ -29,6 +29,8 @@ func save_game():
     file.store_string(to_json(content))
     file.close()
     print('Game saved to ' + OS.get_user_data_dir())
+    if quit:
+        get_tree().quit()
 
 func load_game():
     var file = File.new()
@@ -37,3 +39,7 @@ func load_game():
     file.close()
     house = loading['house']
     var _err = get_tree().change_scene(loading['scene'])
+
+func pause():
+    get_tree().paused = !get_tree().paused
+    get_tree().current_scene.get_node('Pause/Pause').visible = get_tree().paused
