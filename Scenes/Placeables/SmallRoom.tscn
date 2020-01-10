@@ -41,5 +41,3 @@ position = Vector2( -0.160816, 569.066 )
 shape = SubResource( 3 )
 [connection signal="body_entered" from="Wall" to="Wall" method="_on_body_entered"]
 [connection signal="body_exited" from="Wall" to="Wall" method="_on_body_exited"]
-[connection signal="body_entered" from="Interactive" to="." method="_on_Interactive_body_entered"]
-[connection signal="body_exited" from="Interactive" to="." method="_on_Interactive_body_exited"]

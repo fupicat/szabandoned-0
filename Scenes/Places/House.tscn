@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,9 @@ extents = Vector2( 3531.48, 5.19971 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 515.904, 215.157 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 260.784, 221.534 )
+
 [node name="House" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -22,7 +25,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3141.06, 1566.63 )
+position = Vector2( 3365.55, 1566.63 )
 z_index = -22
 collision/safe_margin = 0.8
 
@@ -40,7 +43,7 @@ z_index = -4096
 texture = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Grama"]
-polygon = PoolVector2Array( 3506.58, -1789.35, -3408.04, -1789.35, -3409.11, 1800.59, 3419.21, 1802.29, 3417.41, -1786.85, 3511.11, -1786.04, 5129.14, -2775.55, 5120.62, 3335.81, -4899.54, 3374.8, -4879.47, -2855.8, 5115.46, -2775.55 )
+polygon = PoolVector2Array( 3425.26, -1787.52, -3408.04, -1789.35, -3409.11, 1800.59, 3419.21, 1802.29, 3418.61, -1071.97, 4160.44, -1075.03, 4146.02, -1475.19, 5129.14, -2775.55, 5120.62, 3335.81, -4899.54, 3374.8, -4879.47, -2855.8, 5115.46, -2775.55, 4142.33, -1484.61, 3422.17, -1490.79 )
 
 [node name="PlacentDown" type="Area2D" parent="Grama"]
 
@@ -75,8 +78,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="HouseUI" type="CanvasLayer" parent="."]
+[node name="Exit" type="Area2D" parent="."]
 editor/display_folded = true
+position = Vector2( 3893.86, 1550.7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2( 31.0913, 7.17505 )
+shape = SubResource( 3 )
+
+[node name="HouseUI" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]
@@ -117,7 +127,7 @@ margin_top = -106.0
 scroll_vertical_enabled = false
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
-margin_right = 442.0
+margin_right = 562.0
 margin_bottom = 106.0
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -133,13 +143,21 @@ margin_right = 442.0
 margin_bottom = 106.0
 text = "Sofa"
 
+[node name="Sign" type="Button" parent="HouseUI/UI/Items/H"]
+margin_left = 452.0
+margin_right = 562.0
+margin_bottom = 106.0
+text = "Sign"
+
 [node name="Pause" parent="." instance=ExtResource( 7 )]
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
+[connection signal="body_entered" from="Exit" to="." method="_on_Exit_body_entered"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Delete" to="HouseUI" method="_on_Delete_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/Sofa" to="HouseUI" method="_on_Sofa_pressed"]
+[connection signal="pressed" from="HouseUI/UI/Items/H/Sign" to="HouseUI" method="_on_Sign_pressed"]

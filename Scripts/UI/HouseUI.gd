@@ -19,3 +19,6 @@ func _on_Sofa_pressed():
 func _on_Delete_pressed():
     get_parent().delete_mode = true
     get_parent().switch_edit_mode()
+
+func _on_Sign_pressed():
+    get_parent().add_placeable(load("res://Scenes/Placeables/Sign.tscn"))

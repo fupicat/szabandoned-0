@@ -46,7 +46,9 @@ func _physics_process(_delta):
     anim_walk()
 
 func _input(event):
-    if event.is_action_pressed("action") and !get_parent().edit_mode and !$Actions.phantom_select and can_walk:
+    if event.is_action_pressed("action") and !$Actions.phantom_select and can_walk:
+        if get_tree().current_scene.filename.ends_with('House.tscn') and get_parent().edit_mode:
+            return
         var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
             var onmes = []

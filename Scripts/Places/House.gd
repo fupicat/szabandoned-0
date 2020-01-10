@@ -137,6 +137,10 @@ func delete_obj():
     if delthis != null:
         delthis.queue_free()
 
+func _on_Exit_body_entered(body):
+    if body == $Player:
+        var _err = get_tree().change_scene('res://Scenes/Places/Town.tscn')
+
 # Actions
 
 func Rotate(var upper):
@@ -146,19 +150,21 @@ func Rotate(var upper):
     var path = upper.get_node('Sprite').texture.resource_path
     if path.ends_with('Side.png'):
         path = path.replace('Side.png', '')
-        if upper.scale.x == 1:
+        if upper.scale.x > 0:
             upper.get_node('Sprite').texture = load(path + 'Front.png')
-        if upper.scale.x == -1:
-            upper.scale.x = 1
+        if upper.scale.x < 0:
+            upper.scale.x = upper.scale.x * -1
             upper.get_node('Sprite').texture = load(path + 'Back.png')
     elif path.ends_with('Front.png'):
         path = path.replace('Front.png', '')
-        upper.scale.x = -1
+        upper.scale.x = upper.scale.x * -1
         upper.get_node('Sprite').texture = load(path + 'Side.png')
     elif path.ends_with('Back.png'):
         path = path.replace('Back.png', '')
-        upper.scale.x = 1
+        upper.scale.x = upper.scale.x * -1
         upper.get_node('Sprite').texture = load(path + 'Side.png')
+    else:
+        upper.scale.x = upper.scale.x * -1
     $Player.can_walk = true
 
 func walk2do(var upper, var action):
@@ -179,3 +185,17 @@ func Sit(var onwhat):
         $Player.animation('SitFront')
     elif path.ends_with('Back.png'):
         $Player.animation('SitFront')
+
+func Change(var upper):
+    $Player/CollisionShape2D.disabled = false
+    $Player.disconnect('got_there', $".", 'Change')
+    var i = 0
+    for item in upper.xtra_sprites:
+        if 'res://Art/Placeables/' + item + '.png' == upper.get_node('Sprite').texture.resource_path:
+            if len(upper.xtra_sprites) > i + 1:
+                upper.get_node('Sprite').texture = load('res://Art/Placeables/' + upper.xtra_sprites[i + 1] + '.png')
+            else:
+                upper.get_node('Sprite').texture = load('res://Art/Placeables/' + upper.xtra_sprites[0] + '.png')
+            break
+        i += 1
+    $Player.can_walk = true

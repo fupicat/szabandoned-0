@@ -17,9 +17,10 @@ func _input(event):
         pause()
         
 func save_game(var quit = false):
-    house = []
-    for node in get_tree().get_nodes_in_group('Interactable'):
-        house.append({'file':node.filename, 'pos':node.global_position, 'sprite':node.get_node('Sprite').texture.resource_path, 'scale':node.scale})
+    if get_tree().current_scene.filename == 'res://Scenes/Places/House.tscn':
+        house = []
+        for node in get_tree().get_nodes_in_group('Interactable'):
+            house.append({'file':node.filename, 'pos':node.global_position, 'sprite':node.get_node('Sprite').texture.resource_path, 'scale':node.scale})
     var file = File.new()
     var dir = Directory.new()
     var content = {'house':house, 'scene':get_tree().current_scene.filename}

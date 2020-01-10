@@ -1,34 +1,32 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Placeable.gd" type="Script" id=1]
-[ext_resource path="res://Art/Placeables/SofaSide.png" type="Texture" id=2]
+[ext_resource path="res://Art/Placeables/Sign.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 113.752, 35.162 )
+extents = Vector2( 59.8019, 30.3613 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 124.25, 46.8485 )
+extents = Vector2( 72.2358, 41.1125 )
 
-[node name="Sofa" type="StaticBody2D" groups=[
+[node name="Sign" type="StaticBody2D" groups=[
 "Interactable",
 ]]
 script = ExtResource( 1 )
-interact = [ "Sit", "Rotate" ]
+interact = [ "Change", "Rotate" ]
+xtra_sprites = [ "Sign", "SignHey", "SignHouse" ]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -109.093 )
+position = Vector2( -3.40442, -149.04 )
 texture = ExtResource( 2 )
-offset = Vector2( -0.698349, -20.4878 )
 
 [node name="Col" type="CollisionShape2D" parent="."]
-position = Vector2( -1.948, -6.37672 )
 shape = SubResource( 1 )
 
 [node name="Interactive" type="Area2D" parent="."]
 
 [node name="Col" type="CollisionShape2D" parent="Interactive"]
-position = Vector2( -1.7962, -6.58612 )
 shape = SubResource( 2 )
 
 [node name="IntPos" type="Position2D" parent="."]
-position = Vector2( 164.044, -4.1011 )
+position = Vector2( 0, 74 )

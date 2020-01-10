@@ -3,10 +3,14 @@ extends StaticBody2D
 var move = false
 #warning-ignore:UNUSED_CLASS_VARIABLE
 export var interact = []
+#warning-ignore:UNUSED_CLASS_VARIABLE
+export var xtra_sprites = []
 var on_me = false
 
 func _ready():
     update_z()
+    var _err = $Interactive.connect("body_entered", $".", '_on_Interactive_body_entered')
+    _err = $Interactive.connect("body_exited", $".", '_on_Interactive_body_exited')
 
 func _physics_process(_delta):
     if move:
