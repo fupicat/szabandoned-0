@@ -87,6 +87,7 @@ position = Vector2( 31.0913, 7.17505 )
 shape = SubResource( 3 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]

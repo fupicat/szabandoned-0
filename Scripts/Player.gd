@@ -78,13 +78,13 @@ func walk_to(var obj):
 func anim_walk():
     if can_animate:
         if abs(move.x) < 5 and abs(move.y) < 5:
-            $Anim.play("Idle")
+            $Scrat/Anim.play("Idle")
         else:
-            $Anim.play("Walk")
+            $Scrat/Anim.play("Walk")
 
 func animation(var name):
     can_animate = false
-    $Anim.play(name)
+    $Scrat/Anim.play(name)
 
 func cancel_action():
     target = null
