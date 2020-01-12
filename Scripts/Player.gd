@@ -12,7 +12,7 @@ var target = null
 signal got_there
 
 func _physics_process(_delta):
-    if can_walk:
+    if can_walk or target != null:
         #warning-ignore:NARROWING_CONVERSION
         z_index = global_position.y / 10
     var run = RUNADD * int(Input.is_action_pressed("run"))
@@ -34,11 +34,15 @@ func _physics_process(_delta):
     
     if target != null and !can_walk:
         can_walk = false
+        $Scrat.scale.x = 1
+        if target.x < global_position.x:
+            $Scrat.scale.x = -1
         move = (target - position).normalized() * (SPEED + RUNADD)
         if (target - position).length() < 10:
             move = Vector2(0, 0)
             global_position = target
             target = null
+            can_walk = true
             emit_signal('got_there')
     
     move = move_and_slide(move)
@@ -69,6 +73,9 @@ func _input(event):
                     $Actions.menu(upper, upper.interact)
     if event.is_action_pressed('run') and !can_animate and !can_walk:
         cancel_action()
+    if event.is_action_pressed("click"):
+        can_walk = false
+        target = get_global_mouse_position()
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
