@@ -1,235 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Art/Scrat/Hands/White.png" type="Texture" id=2]
-[ext_resource path="res://Art/Scrat/Feet/BrownShoes.png" type="Texture" id=3]
-[ext_resource path="res://Art/Scrat/Body/OrangeUniform.png" type="Texture" id=4]
-[ext_resource path="res://Art/Scrat/Pants/DoublePants.png" type="Texture" id=5]
-[ext_resource path="res://Art/Scrat/Head/Round.png" type="Texture" id=6]
-[ext_resource path="res://Art/Scrat/Eyes/Normal.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/UI/ActionsUI.gd" type="Script" id=8]
-[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=9]
-
-[sub_resource type="Animation" id=3]
-resource_name = "Idle"
-length = 1.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("HandBack:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 44.2287, -78.5557 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("HandBack:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HandBack:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("FootBack:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 12.7502, -2.88434 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("FootBack:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("FootBack:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Body:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( -2, -2 ),
-"update": 0,
-"values": [ Vector2( -1.5, -103 ), Vector2( -1.5, -95 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Body:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Body:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( -2, -2 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 0.9 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Head:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( -2, -2 ),
-"update": 0,
-"values": [ Vector2( 0.5, -211 ), Vector2( 0.5, -200 ) ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("Head:rotation_degrees")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("Head:scale")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("FootFore:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -15.5101, 2.92291 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("FootFore:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/14/type = "value"
-tracks/14/path = NodePath("FootFore:scale")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("HandFore:position")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -47.0779, -70.8179 ) ]
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("HandFore:rotation_degrees")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("HandFore:scale")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
+[ext_resource path="res://Scenes/Scrat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/UI/ActionsUI.gd" type="Script" id=3]
+[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54.3453, 26.4223 )
@@ -294,46 +68,7 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="Scrat" type="Node2D" parent="."]
-
-[node name="HandBack" type="Sprite" parent="Scrat"]
-position = Vector2( 44.2287, -78.5557 )
-texture = ExtResource( 2 )
-
-[node name="FootBack" type="Sprite" parent="Scrat"]
-position = Vector2( 12.7502, -2.88434 )
-texture = ExtResource( 3 )
-
-[node name="Body" type="Sprite" parent="Scrat"]
-editor/display_folded = true
-position = Vector2( -1.5, -100.159 )
-scale = Vector2( 1.03552, 0.964483 )
-texture = ExtResource( 4 )
-
-[node name="DoublePants" type="Sprite" parent="Scrat/Body"]
-position = Vector2( 0, 37 )
-texture = ExtResource( 5 )
-
-[node name="Head" type="Sprite" parent="Scrat"]
-editor/display_folded = true
-position = Vector2( 0.5, -207.093 )
-texture = ExtResource( 6 )
-
-[node name="Eyes" type="Sprite" parent="Scrat/Head"]
-position = Vector2( 35, 5 )
-texture = ExtResource( 7 )
-
-[node name="FootFore" type="Sprite" parent="Scrat"]
-position = Vector2( -15.5101, 2.92291 )
-texture = ExtResource( 3 )
-
-[node name="HandFore" type="Sprite" parent="Scrat"]
-position = Vector2( -47.0779, -70.8179 )
-texture = ExtResource( 2 )
-
-[node name="Anim" type="AnimationPlayer" parent="Scrat"]
-autoplay = "Idle"
-anims/Idle = SubResource( 3 )
+[node name="Scrat" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.000139281 )
@@ -352,7 +87,7 @@ smoothing_enabled = true
 editor/display_folded = true
 visible = false
 z_index = 4096
-script = ExtResource( 8 )
+script = ExtResource( 3 )
 
 [node name="Menu" type="Control" parent="Actions"]
 anchor_left = 0.5
@@ -371,7 +106,7 @@ anchor_bottom = 0.5
 margin_top = -118.0
 margin_right = 236.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="R" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
@@ -381,7 +116,7 @@ anchor_bottom = 0.5
 margin_left = -236.0
 margin_top = -118.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="U" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
@@ -389,7 +124,7 @@ anchor_right = 0.5
 margin_left = -118.0
 margin_right = 118.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="D" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
@@ -399,19 +134,19 @@ anchor_bottom = 1.0
 margin_left = -118.0
 margin_top = -236.0
 margin_right = 118.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="LU" type="TextureButton" parent="Actions/Menu"]
 margin_right = 236.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="RU" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -236.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="RD" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
@@ -420,14 +155,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -236.0
 margin_top = -236.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="LD" type="TextureButton" parent="Actions/Menu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -236.0
 margin_right = 236.0
-texture_normal = ExtResource( 9 )
+texture_normal = ExtResource( 4 )
 
 [node name="Anim" type="AnimationPlayer" parent="Actions"]
 anims/In = SubResource( 2 )

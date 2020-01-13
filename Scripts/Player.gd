@@ -84,10 +84,13 @@ func walk_to(var obj):
 
 func anim_walk():
     if can_animate:
-        if abs(move.x) < 5 and abs(move.y) < 5:
+        if abs(move.x) < 30 and abs(move.y) < 30:
             $Scrat/Anim.play("Idle")
         else:
-            $Scrat/Anim.play("Walk")
+            if Input.is_action_pressed('run'):
+                $Scrat/Anim.play('Run')
+            else:
+                $Scrat/Anim.play("Walk")
 
 func animation(var name):
     can_animate = false
