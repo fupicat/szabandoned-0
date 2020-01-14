@@ -32,13 +32,13 @@ func _physics_process(_delta):
         else:
             $Scrat.scale.x = -1
     
-    if target != null and !can_walk:
+    if target != null and !can_walk and !$Actions.visible:
         can_walk = false
         $Scrat.scale.x = 1
         if target.x < global_position.x:
             $Scrat.scale.x = -1
         move = (target - position).normalized() * (SPEED + RUNADD)
-        if (target - position).length() < 10:
+        if (target - position).length() < 20:
             move = Vector2(0, 0)
             global_position = target
             target = null
@@ -76,6 +76,9 @@ func _input(event):
     if event.is_action_pressed("click"):
         can_walk = false
         target = get_global_mouse_position()
+    if event.is_action_pressed("down") or event.is_action_pressed("left") or event.is_action_pressed("right") or event.is_action_pressed("up"):
+        target = null
+        can_walk = true
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
