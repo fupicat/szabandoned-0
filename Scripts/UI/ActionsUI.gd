@@ -58,3 +58,51 @@ func _input(event):
 
 func _on_Timer_timeout():
     phantom_select = false
+
+func _on_L_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/L.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_R_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/R.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_U_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/U.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_D_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/D.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_LU_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LU.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_RU_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RU.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_RD_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RD.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()
+
+func _on_LD_pressed():
+    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LD.get_position_in_parent()])
+    select = false
+    hide()
+    $Timer.start()

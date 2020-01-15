@@ -87,12 +87,12 @@ position = Vector2( 31.0913, 7.17505 )
 shape = SubResource( 3 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="UI" type="Control" parent="HouseUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 6 )
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
@@ -100,6 +100,8 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 84.0
 margin_bottom = 28.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 text = "Add Item"
 
 [node name="Move" type="Button" parent="HouseUI/UI"]

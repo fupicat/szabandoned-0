@@ -6,11 +6,14 @@ export var interact = []
 #warning-ignore:UNUSED_CLASS_VARIABLE
 export var xtra_sprites = []
 var on_me = false
+var hover_me = false
 
 func _ready():
     update_z()
     var _err = $Interactive.connect("body_entered", $".", '_on_Interactive_body_entered')
     _err = $Interactive.connect("body_exited", $".", '_on_Interactive_body_exited')
+    _err = $Interactive.connect("mouse_entered", $".", '_on_Interactive_mouse_entered')
+    _err = $Interactive.connect("mouse_exited", $".", '_on_Interactive_mouse_exited')
 
 func _physics_process(_delta):
     if move:
@@ -28,6 +31,12 @@ func _on_Interactive_body_entered(body):
 func _on_Interactive_body_exited(body):
     if body == get_parent().get_node("Player"):
         on_me = false
+
+func _on_Interactive_mouse_entered():
+    hover_me = true
+
+func _on_Interactive_mouse_exited():
+    hover_me = false
 
 func place():
     if get_parent().get_node('Grama/Path').get_overlapping_bodies().has(get_parent().get_node('Player')):

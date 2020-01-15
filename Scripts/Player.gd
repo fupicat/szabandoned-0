@@ -74,11 +74,31 @@ func _input(event):
     if event.is_action_pressed('run') and !can_animate and !can_walk:
         cancel_action()
     if event.is_action_pressed("click"):
-        can_walk = false
-        target = get_global_mouse_position()
+        if get_tree().current_scene.filename.ends_with('House.tscn') and get_parent().edit_mode:
+            can_walk = false
+            target = get_global_mouse_position()
+            return
+        var inters = get_tree().get_nodes_in_group("Interactable")
+        if len(inters) > 0:
+            var onmes = []
+            var upper = null
+            for node in inters: # Get all interactable nodes and detect which ones the mouse is touching.
+                if node.hover_me:
+                    onmes.append(node)
+            if len(onmes) > 0:
+                upper = onmes[0]
+                for node in onmes:
+                    if node.z_index > upper.z_index:
+                        upper = node
+                if len(upper.interact) > 0:
+                    $Actions.menu(upper, upper.interact)
+            else:
+                can_walk = false
+                target = get_global_mouse_position()
     if event.is_action_pressed("down") or event.is_action_pressed("left") or event.is_action_pressed("right") or event.is_action_pressed("up"):
-        target = null
-        can_walk = true
+        if target != null and !$Actions.visible:
+            target = null
+            can_walk = true
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):

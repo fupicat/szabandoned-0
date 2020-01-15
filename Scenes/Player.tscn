@@ -84,7 +84,6 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="Actions" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 z_index = 4096
 script = ExtResource( 3 )
@@ -171,4 +170,12 @@ anims/In = SubResource( 2 )
 process_mode = 0
 wait_time = 0.1
 one_shot = true
+[connection signal="pressed" from="Actions/Menu/L" to="Actions" method="_on_L_pressed"]
+[connection signal="pressed" from="Actions/Menu/R" to="Actions" method="_on_R_pressed"]
+[connection signal="pressed" from="Actions/Menu/U" to="Actions" method="_on_U_pressed"]
+[connection signal="pressed" from="Actions/Menu/D" to="Actions" method="_on_D_pressed"]
+[connection signal="pressed" from="Actions/Menu/LU" to="Actions" method="_on_LU_pressed"]
+[connection signal="pressed" from="Actions/Menu/RU" to="Actions" method="_on_RU_pressed"]
+[connection signal="pressed" from="Actions/Menu/RD" to="Actions" method="_on_RD_pressed"]
+[connection signal="pressed" from="Actions/Menu/LD" to="Actions" method="_on_LD_pressed"]
 [connection signal="timeout" from="Actions/Timer" to="Actions" method="_on_Timer_timeout"]
