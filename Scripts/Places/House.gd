@@ -42,6 +42,7 @@ func _input(event):
         
 
 func switch_edit_mode(): # Returns true if switched.
+    $Player.target = null
     if edit_mode:
         var cant = false
         for node in get_tree().get_nodes_in_group("Interactable"):

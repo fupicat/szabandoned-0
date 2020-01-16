@@ -13,12 +13,13 @@ func menu(var object, var actions):
     var i = 0
     var file = File.new()
     for node in $Menu.get_children():
-        node.texture_normal = null
+        node.hide()
     for act in actions:
         var texture = load('res://Art/GUI/Use.png')
         if file.file_exists('res://Art/GUI/' + act + '.png'):
             texture = load('res://Art/GUI/' + act + '.png')
         $Menu.get_child(i).texture_normal = texture
+        $Menu.get_child(i).show()
         i+=1
     $Anim.stop()
     active = ''
@@ -48,7 +49,7 @@ func _process(_delta):
 
 func _input(event):
     if event.is_action_pressed("action") and select:
-        if active != '' and get_node('Menu/' + active).texture_normal != null:
+        if active != '' and get_node('Menu/' + active).visible:
             get_parent().get_parent().call('walk2do', the_obj, the_actions[get_node('Menu/' + active).get_position_in_parent()])
         select = false
         hide()
