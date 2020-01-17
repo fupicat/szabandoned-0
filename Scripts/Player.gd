@@ -92,6 +92,9 @@ func _input(event):
                         upper = node
                 if len(upper.interact) > 0:
                     $Actions.menu(upper, upper.interact)
+                else:
+                    can_walk = false
+                    target = get_global_mouse_position()
             else:
                 can_walk = false
                 target = get_global_mouse_position()
