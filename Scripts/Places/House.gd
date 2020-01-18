@@ -154,15 +154,15 @@ func Rotate(var upper):
         if upper.scale.x > 0:
             upper.get_node('Sprite').texture = load(path + 'Front.png')
         if upper.scale.x < 0:
-            upper.scale.x = upper.scale.x * -1
+            upper.scale.x = abs(upper.scale.x)
             upper.get_node('Sprite').texture = load(path + 'Back.png')
     elif path.ends_with('Front.png'):
         path = path.replace('Front.png', '')
-        upper.scale.x = upper.scale.x * -1
+        upper.scale.x = abs(upper.scale.x) * -1
         upper.get_node('Sprite').texture = load(path + 'Side.png')
     elif path.ends_with('Back.png'):
         path = path.replace('Back.png', '')
-        upper.scale.x = upper.scale.x * -1
+        upper.scale.x = abs(upper.scale.x)
         upper.get_node('Sprite').texture = load(path + 'Side.png')
     else:
         upper.scale.x = upper.scale.x * -1
