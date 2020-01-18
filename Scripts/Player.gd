@@ -75,8 +75,7 @@ func _input(event):
         cancel_action()
     if event.is_action_pressed("click"):
         if get_tree().current_scene.filename.ends_with('House.tscn') and get_parent().edit_mode:
-            can_walk = false
-            target = get_global_mouse_position()
+            target_mouse()
             return
         var inters = get_tree().get_nodes_in_group("Interactable")
         if len(inters) > 0:
@@ -93,15 +92,20 @@ func _input(event):
                 if len(upper.interact) > 0:
                     $Actions.menu(upper, upper.interact)
                 else:
-                    can_walk = false
-                    target = get_global_mouse_position()
+                    target_mouse()
             else:
-                can_walk = false
-                target = get_global_mouse_position()
+                target_mouse()
     if event.is_action_pressed("down") or event.is_action_pressed("left") or event.is_action_pressed("right") or event.is_action_pressed("up"):
         if target != null and !$Actions.visible:
             target = null
             can_walk = true
+
+func target_mouse():
+    if ('on_UI' in get_parent()) and get_parent().on_UI:
+        print('cant')
+        return
+    can_walk = false
+    target = get_global_mouse_position()
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):

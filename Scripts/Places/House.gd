@@ -9,6 +9,8 @@ var obj = null
 var place_up = true
 var place_down = true
 
+var on_UI = false
+
 func _ready():
     $Player/Camera2D.limit_left = -3500
     $Player/Camera2D.limit_right = 3500
