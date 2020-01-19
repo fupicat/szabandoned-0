@@ -1,19 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Places/Town.gd" type="Script" id=1]
 [ext_resource path="res://Art/Grama.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scripts/Placeable.gd" type="Script" id=5]
-[ext_resource path="res://Art/Placeables/SignHouse.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/ExitMouse.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Placeable.gd" type="Script" id=6]
+[ext_resource path="res://Art/Placeables/SignHouse.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 354.533, 257.986 )
+extents = Vector2( 370.187, 257.986 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 387.96, 259.398 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 59.8019, 30.3613 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 72.2358, 41.1125 )
 
 [node name="Town" type="Node2D"]
@@ -46,16 +50,24 @@ position = Vector2( -445.586, 298.869 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToHouse"]
 shape = SubResource( 1 )
 
+[node name="ToHouseMouse" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( -227.685, 299.585 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToHouseMouse"]
+shape = SubResource( 2 )
+
 [node name="Sign" type="StaticBody2D" parent="." groups=[
 "Interactable",
 ]]
 editor/display_folded = true
 position = Vector2( 352.356, 154.542 )
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Sign"]
 position = Vector2( -3.40442, -149.04 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Col" type="CollisionShape2D" parent="Sign"]
 shape = SubResource( 3 )
@@ -63,7 +75,7 @@ shape = SubResource( 3 )
 [node name="Interactive" type="Area2D" parent="Sign"]
 
 [node name="Col" type="CollisionShape2D" parent="Sign/Interactive"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="IntPos" type="Position2D" parent="Sign"]
 position = Vector2( 0, 74 )

@@ -12,6 +12,7 @@ var place_down = true
 var on_UI = false
 
 func _ready():
+    $Player/Scrat.scale.x = -1
     $Player/Camera2D.limit_left = -3500
     $Player/Camera2D.limit_right = 3500
     $Player/Camera2D.limit_bottom = 4720

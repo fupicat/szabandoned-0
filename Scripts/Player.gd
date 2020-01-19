@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var move = Vector2(0, 0)
-const SPEED = 400
-const RUNADD = 400
+const SPEED = 500
+const RUNADD = 500
 const SLIP = 0.20
 
 var can_walk = true
@@ -106,6 +106,9 @@ func target_mouse():
         return
     can_walk = false
     target = get_global_mouse_position()
+    for node in get_tree().get_nodes_in_group('Exit'):
+        if node.on_me:
+            target = node.global_position
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):

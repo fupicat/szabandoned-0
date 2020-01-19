@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Grama.png" type="Texture" id=3]
 [ext_resource path="res://Art/Placeables/SmallRoom.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=5]
-[ext_resource path="res://SimpleTheme.tres" type="Theme" id=6]
-[ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/ExitMouse.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=6]
+[ext_resource path="res://SimpleTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
@@ -16,6 +17,9 @@ extents = Vector2( 515.904, 215.157 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 260.784, 221.534 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 556.749, 217.628 )
 
 [node name="House" type="Node2D"]
 script = ExtResource( 1 )
@@ -78,22 +82,30 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Exit" type="Area2D" parent="."]
+[node name="ToTown" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 3893.86, 1550.7 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToTown"]
 position = Vector2( 31.0913, 7.17505 )
 shape = SubResource( 3 )
 
-[node name="HouseUI" type="CanvasLayer" parent="."]
+[node name="ToTownMouse" type="Area2D" parent="."]
+position = Vector2( 3784.6, 1555.17 )
 script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToTownMouse"]
+shape = SubResource( 4 )
+
+[node name="HouseUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
+script = ExtResource( 6 )
 
 [node name="UI" type="Control" parent="HouseUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-theme = ExtResource( 6 )
+theme = ExtResource( 7 )
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
@@ -151,12 +163,12 @@ margin_right = 562.0
 margin_bottom = 106.0
 text = "Sign"
 
-[node name="Pause" parent="." instance=ExtResource( 7 )]
+[node name="Pause" parent="." instance=ExtResource( 8 )]
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
-[connection signal="body_entered" from="Exit" to="." method="_on_Exit_body_entered"]
+[connection signal="body_entered" from="ToTown" to="." method="_on_Exit_body_entered"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Delete" to="HouseUI" method="_on_Delete_pressed"]
