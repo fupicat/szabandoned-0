@@ -56,9 +56,17 @@ func _input(event):
         $Timer.start()
         if active == '':
             get_parent().can_walk = true
+    if event.is_action_pressed("click") and visible:
+        $Click.start()
 
 func _on_Timer_timeout():
     phantom_select = false
+    
+func _on_Click_timeout():
+    if visible:
+        select = false
+        hide()
+        $Timer.start()
 
 func _on_L_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/L.get_position_in_parent()])

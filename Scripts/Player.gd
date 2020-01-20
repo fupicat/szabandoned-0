@@ -89,7 +89,7 @@ func _input(event):
                 for node in onmes:
                     if node.z_index > upper.z_index:
                         upper = node
-                if len(upper.interact) > 0:
+                if len(upper.interact) > 0 and can_animate:
                     $Actions.menu(upper, upper.interact)
                 else:
                     target_mouse()
@@ -102,13 +102,15 @@ func _input(event):
 
 func target_mouse():
     if ('on_UI' in get_parent()) and get_parent().on_UI:
-        print('cant')
         return
-    can_walk = false
-    target = get_global_mouse_position()
-    for node in get_tree().get_nodes_in_group('Exit'):
-        if node.on_me:
-            target = node.global_position
+    if can_animate:
+        can_walk = false
+        target = get_global_mouse_position()
+        for node in get_tree().get_nodes_in_group('Exit'):
+            if node.on_me:
+                target = node.global_position
+    else:
+        cancel_action()
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
@@ -127,6 +129,7 @@ func anim_walk():
 
 func animation(var name):
     can_animate = false
+    $Scrat.scale.x = 1
     $Scrat/Anim.play(name)
 
 func cancel_action():

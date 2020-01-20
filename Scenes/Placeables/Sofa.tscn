@@ -32,3 +32,6 @@ shape = SubResource( 2 )
 
 [node name="IntPos" type="Position2D" parent="."]
 position = Vector2( 164.044, -4.1011 )
+
+[node name="Sit" type="Position2D" parent="."]
+position = Vector2( 0, -50.9787 )

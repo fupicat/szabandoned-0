@@ -179,11 +179,12 @@ func Sit(var onwhat):
     $Player.can_walk = false
     var path = onwhat.get_node('Sprite').texture.resource_path
     $Player.z_index = onwhat.z_index - 1
+    $Player.global_position = onwhat.get_node('Sit').global_position
     if path.ends_with('Side.png'):
         if onwhat.scale.x == 1:
-            $Player.animation('SitRight')
-        else:
             $Player.animation('SitLeft')
+        else:
+            $Player.animation('SitRight')
     elif path.ends_with('Front.png'):
         $Player.z_index = onwhat.z_index + 1
         $Player.animation('SitFront')

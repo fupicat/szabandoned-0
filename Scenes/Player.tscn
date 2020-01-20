@@ -170,6 +170,10 @@ anims/In = SubResource( 2 )
 process_mode = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="Click" type="Timer" parent="Actions"]
+wait_time = 0.1
+one_shot = true
 [connection signal="pressed" from="Actions/Menu/L" to="Actions" method="_on_L_pressed"]
 [connection signal="pressed" from="Actions/Menu/R" to="Actions" method="_on_R_pressed"]
 [connection signal="pressed" from="Actions/Menu/U" to="Actions" method="_on_U_pressed"]
@@ -179,3 +183,4 @@ one_shot = true
 [connection signal="pressed" from="Actions/Menu/RD" to="Actions" method="_on_RD_pressed"]
 [connection signal="pressed" from="Actions/Menu/LD" to="Actions" method="_on_LD_pressed"]
 [connection signal="timeout" from="Actions/Timer" to="Actions" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Actions/Click" to="Actions" method="_on_Click_timeout"]
