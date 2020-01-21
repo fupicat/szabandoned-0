@@ -98,7 +98,6 @@ script = ExtResource( 5 )
 shape = SubResource( 4 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="UI" type="Control" parent="HouseUI"]
@@ -114,6 +113,14 @@ margin_right = 84.0
 margin_bottom = 28.0
 mouse_default_cursor_shape = 2
 text = "Add Item"
+
+[node name="Select" type="Button" parent="HouseUI/UI"]
+margin_left = 8.0
+margin_top = 106.0
+margin_right = 250.0
+margin_bottom = 194.0
+mouse_default_cursor_shape = 2
+text = "Select"
 
 [node name="Move" type="Button" parent="HouseUI/UI"]
 anchor_left = 1.0
@@ -170,6 +177,7 @@ text = "Sign"
 [connection signal="body_exited" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_exited"]
 [connection signal="body_entered" from="ToTown" to="." method="_on_Exit_body_entered"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
+[connection signal="pressed" from="HouseUI/UI/Select" to="HouseUI" method="_on_Select_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Delete" to="HouseUI" method="_on_Delete_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]

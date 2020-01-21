@@ -4,6 +4,7 @@ var on_UI = false
 
 func _ready():
     $UI/Items.hide()
+    $UI/Select.hide()
     for node in $UI.get_children():
         if node is Button:
             node.connect('mouse_entered', $".", '_on_mouse_entered')
@@ -43,3 +44,9 @@ func _on_mouse_entered():
 func _on_mouse_exited():
     get_parent().on_UI = false
     print(get_parent().on_UI)
+
+func _on_Select_pressed():
+    if get_parent().move_mode:
+        get_parent().move_obj()
+    elif get_parent().delete_mode:
+        get_parent().delete_obj()

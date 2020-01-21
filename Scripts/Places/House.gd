@@ -67,8 +67,11 @@ func switch_edit_mode(): # Returns true if switched.
         $HouseUI/UI/Delete.show()
         move_mode = false
         delete_mode = false
+        $HouseUI/UI/Select.hide()
     else:
-        $HouseUI/UI/Mode.text = "Accept"
+        $HouseUI/UI/Mode.text = "Place"
+        if delete_mode:
+            $HouseUI/UI/Mode.text = "Back"
         $HouseUI/UI/Items.show()
         edit_mode = true
         old_xy = $Player.global_position
@@ -83,6 +86,11 @@ func switch_edit_mode(): # Returns true if switched.
             $Player.show()
         $HouseUI/UI/Move.hide()
         $HouseUI/UI/Delete.hide()
+        $HouseUI/UI/Select.text = 'Move this'
+        if move_mode or delete_mode:
+            $HouseUI/UI/Select.show()
+            if delete_mode:
+                $HouseUI/UI/Select.text = 'Delete this'
             
     return true
 
