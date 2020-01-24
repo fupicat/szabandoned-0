@@ -91,6 +91,7 @@ position = Vector2( 0, 74 )
 [node name="NPC" type="KinematicBody2D" parent="." groups=[
 "Interactable",
 ]]
+editor/display_folded = true
 position = Vector2( 1221.91, 443.986 )
 script = ExtResource( 8 )
 
@@ -108,5 +109,3 @@ one_shot = true
 shape = SubResource( 6 )
 [connection signal="body_entered" from="ToHouse" to="." method="_on_ToHouse_body_entered"]
 [connection signal="timeout" from="NPC/Wander" to="NPC" method="_on_Wander_timeout"]
-[connection signal="body_entered" from="NPC/Interact" to="NPC" method="_on_Interact_body_entered"]
-[connection signal="body_exited" from="NPC/Interact" to="NPC" method="_on_Interact_body_exited"]

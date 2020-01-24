@@ -48,12 +48,13 @@ func _process(_delta):
         get_node('Menu/' + active).modulate = Color(0.215686, 0.219608, 1)
 
 func _input(event):
+    if event.is_action_pressed("run") and select:
+        get_parent().can_walk = true
+        hide_menu()
     if event.is_action_pressed("action") and select:
         if active != '' and get_node('Menu/' + active).visible:
             get_parent().get_parent().call('walk2do', the_obj, the_actions[get_node('Menu/' + active).get_position_in_parent()])
-        select = false
-        hide()
-        $Timer.start()
+        hide_menu()
         if active == '':
             get_parent().can_walk = true
     if event.is_action_pressed("click") and visible:
@@ -64,33 +65,23 @@ func _on_Timer_timeout():
     
 func _on_Click_timeout():
     if visible:
-        select = false
-        hide()
-        $Timer.start()
+        hide_menu()
 
 func _on_L_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/L.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_R_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/R.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_U_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/U.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_D_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/D.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_LU_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LU.get_position_in_parent()])
@@ -100,18 +91,18 @@ func _on_LU_pressed():
 
 func _on_RU_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RU.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_RD_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RD.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    hide_menu()
 
 func _on_LD_pressed():
     get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LD.get_position_in_parent()])
+    hide_menu()
+
+func hide_menu():
+    get_parent().set_camera()
     select = false
     hide()
     $Timer.start()

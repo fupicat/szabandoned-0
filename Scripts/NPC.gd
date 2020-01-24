@@ -4,7 +4,10 @@ var move = Vector2(0, 0)
 var speed = 500
 const SLIP = 0.20
 
+var interact = []
+
 var on_me = false
+var hover_me = false
 
 var target = null
 var can_walk = true
@@ -19,8 +22,14 @@ enum BEHAVE {
 }
 
 func _ready():
-    randomize()
     update_z()
+    randomize()
+    
+    var _err = $Interact.connect("body_entered", $".", '_on_Interact_body_entered')
+    _err = $Interact.connect("body_exited", $".", '_on_Interact_body_exited')
+    _err = $Interact.connect("mouse_entered", $".", '_on_Interact_mouse_entered')
+    _err = $Interact.connect("mouse_exited", $".", '_on_Interact_mouse_exited')
+    
     if behavior == BEHAVE.wander:
         $Wander.start(rand_range(0, 3))
 
@@ -74,6 +83,19 @@ func _on_Interact_body_exited(body):
             behavior = BEHAVE.wander
             can_walk = true
             $Wander.start(rand_range(0, 3))
+
+func _on_Interact_mouse_entered():
+    hover_me = true
+    if behavior == BEHAVE.wander:
+        behavior = BEHAVE.stop
+        can_walk = false
+
+func _on_Interact_mouse_exited():
+    hover_me = false
+    if behavior == BEHAVE.stop:
+        behavior = BEHAVE.wander
+        can_walk = true
+        $Wander.start(rand_range(0, 3))
 
 func update_z():
     #warning-ignore:NARROWING_CONVERSION

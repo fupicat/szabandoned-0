@@ -70,6 +70,7 @@ func _input(event):
                     if node.z_index > upper.z_index:
                         upper = node
                 if len(upper.interact) > 0:
+                    set_camera(upper)
                     $Actions.menu(upper, upper.interact)
     if event.is_action_pressed('run') and !can_animate and !can_walk:
         cancel_action()
@@ -90,6 +91,7 @@ func _input(event):
                     if node.z_index > upper.z_index:
                         upper = node
                 if len(upper.interact) > 0 and can_animate:
+                    set_camera(upper)
                     $Actions.menu(upper, upper.interact)
                 else:
                     target_mouse()
@@ -137,3 +139,11 @@ func cancel_action():
     can_animate = true
     can_walk = true
     $CollisionShape2D.disabled = false
+
+func set_camera(var thing = null):
+    if thing == null:
+        $Camera2D.position = Vector2(0, -132.2)
+        $Actions.position = Vector2(0, 0)
+    else:
+        $Camera2D.global_position = thing.global_position
+        $Actions.global_position = thing.global_position
