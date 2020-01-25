@@ -9,6 +9,9 @@ var the_actions = []
 func menu(var object, var actions):
     the_obj = object
     the_actions = actions
+    
+    $Label.text = object.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
+    
     get_parent().can_walk = false
     var i = 0
     var file = File.new()
@@ -42,6 +45,7 @@ func _process(_delta):
         if Input.is_action_pressed("down") and !Input.is_action_pressed("up"):
             ud = 'D'
         active = lr + ud
+        $Label.text = the_actions[get_node('Menu/' + active).get_position_in_parent()] if len(the_actions) > get_node('Menu/' + active).get_position_in_parent() else the_obj.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
     else:
         active = ''
     if active != '':

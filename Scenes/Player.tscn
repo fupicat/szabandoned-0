@@ -1,15 +1,21 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Scrat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/UI/ActionsUI.gd" type="Script" id=3]
-[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Art/GUI/InteractButton.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54.3453, 26.4223 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "In"
+[sub_resource type="DynamicFont" id=2]
+size = 100
+outline_size = 15
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("./Menu:rect_size")
@@ -88,7 +94,18 @@ visible = false
 z_index = 4096
 script = ExtResource( 3 )
 
+[node name="Label" type="Label" parent="Actions"]
+margin_left = -1673.94
+margin_top = -740.363
+margin_right = 1669.06
+margin_bottom = -565.363
+custom_fonts/font = SubResource( 2 )
+text = "Name"
+align = 1
+valign = 1
+
 [node name="Menu" type="Control" parent="Actions"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -105,7 +122,7 @@ anchor_bottom = 0.5
 margin_top = -118.0
 margin_right = 236.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="R" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
@@ -115,7 +132,7 @@ anchor_bottom = 0.5
 margin_left = -236.0
 margin_top = -118.0
 margin_bottom = 118.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="U" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
@@ -123,7 +140,7 @@ anchor_right = 0.5
 margin_left = -118.0
 margin_right = 118.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="D" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 0.5
@@ -133,19 +150,19 @@ anchor_bottom = 1.0
 margin_left = -118.0
 margin_top = -236.0
 margin_right = 118.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="LU" type="TextureButton" parent="Actions/Menu"]
 margin_right = 236.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="RU" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -236.0
 margin_bottom = 236.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="RD" type="TextureButton" parent="Actions/Menu"]
 anchor_left = 1.0
@@ -154,17 +171,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -236.0
 margin_top = -236.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="LD" type="TextureButton" parent="Actions/Menu"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -236.0
 margin_right = 236.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="Anim" type="AnimationPlayer" parent="Actions"]
-anims/In = SubResource( 2 )
+anims/In = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="Actions"]
 process_mode = 0
