@@ -105,7 +105,6 @@ align = 1
 valign = 1
 
 [node name="Menu" type="Control" parent="Actions"]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -191,13 +190,21 @@ one_shot = true
 [node name="Click" type="Timer" parent="Actions"]
 wait_time = 0.1
 one_shot = true
+[connection signal="mouse_entered" from="Actions/Menu/L" to="Actions" method="_on_L_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/L" to="Actions" method="_on_L_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/R" to="Actions" method="_on_R_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/R" to="Actions" method="_on_R_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/U" to="Actions" method="_on_U_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/U" to="Actions" method="_on_U_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/D" to="Actions" method="_on_D_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/D" to="Actions" method="_on_D_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/LU" to="Actions" method="_on_LU_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/LU" to="Actions" method="_on_LU_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/RU" to="Actions" method="_on_RU_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/RU" to="Actions" method="_on_RU_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/RD" to="Actions" method="_on_RD_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/RD" to="Actions" method="_on_RD_pressed"]
+[connection signal="mouse_entered" from="Actions/Menu/LD" to="Actions" method="_on_LD_mouse_entered"]
 [connection signal="pressed" from="Actions/Menu/LD" to="Actions" method="_on_LD_pressed"]
 [connection signal="timeout" from="Actions/Timer" to="Actions" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Actions/Click" to="Actions" method="_on_Click_timeout"]

@@ -6,6 +6,15 @@ var phantom_select = false
 var the_obj = null
 var the_actions = []
 
+var hover_l = false
+var hover_r = false
+var hover_u = false
+var hover_d = false
+
+func _ready():
+    for node in $Menu.get_children():
+        node.connect('mouse_exited', $".", '_on_mouse_none')
+
 func menu(var object, var actions):
     the_obj = object
     the_actions = actions
@@ -36,16 +45,16 @@ func _process(_delta):
             node.modulate = Color(1, 1, 1)
         var lr = ''
         var ud = ''
-        if Input.is_action_pressed('left') and !Input.is_action_pressed("right"):
+        if hover_l and !hover_r:
             lr = 'L'
-        if Input.is_action_pressed("right") and !Input.is_action_pressed('left'):
+        if hover_r and !hover_l:
             lr = 'R'
-        if Input.is_action_pressed("up") and !Input.is_action_pressed("down"):
+        if hover_u and !hover_d:
             ud = 'U'
-        if Input.is_action_pressed("down") and !Input.is_action_pressed("up"):
+        if hover_d and !hover_u:
             ud = 'D'
         active = lr + ud
-        $Label.text = the_actions[get_node('Menu/' + active).get_position_in_parent()] if len(the_actions) > get_node('Menu/' + active).get_position_in_parent() else the_obj.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
+        $Label.text = the_actions[get_node('Menu/' + active).get_position_in_parent()] if active != '' and len(the_actions) > get_node('Menu/' + active).get_position_in_parent() else the_obj.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
     else:
         active = ''
     if active != '':
@@ -63,6 +72,30 @@ func _input(event):
             get_parent().can_walk = true
     if event.is_action_pressed("click") and visible:
         $Click.start()
+    
+    # Barf
+    if event.is_action_pressed('left'):
+        hover_l = true
+    if event.is_action_released('left'):
+        hover_l = false
+    if event.is_action_pressed('right'):
+        hover_r = true
+    if event.is_action_released('right'):
+        hover_r = false
+    if event.is_action_pressed('left') and event.is_action_pressed('right'):
+        hover_l = false
+        hover_r = false
+    if event.is_action_pressed('up'):
+        hover_u = true
+    if event.is_action_released('up'):
+        hover_u = false
+    if event.is_action_pressed('down'):
+        hover_d = true
+    if event.is_action_released('down'):
+        hover_d = false
+    if event.is_action_pressed('left') and event.is_action_pressed('right'):
+        hover_u = false
+        hover_d = false
 
 func _on_Timer_timeout():
     phantom_select = false
@@ -110,3 +143,57 @@ func hide_menu():
     select = false
     hide()
     $Timer.start()
+
+func _on_L_mouse_entered():
+    hover_l = true
+    hover_r = false
+    hover_u = false
+    hover_d = false
+
+func _on_R_mouse_entered():
+    hover_l = false
+    hover_r = true
+    hover_u = false
+    hover_d = false
+
+func _on_U_mouse_entered():
+    hover_l = false
+    hover_r = false
+    hover_u = true
+    hover_d = false
+
+func _on_D_mouse_entered():
+    hover_l = false
+    hover_r = false
+    hover_u = false
+    hover_d = true
+
+func _on_LU_mouse_entered():
+    hover_l = true
+    hover_r = false
+    hover_u = true
+    hover_d = false
+
+func _on_RU_mouse_entered():
+    hover_l = false
+    hover_r = true
+    hover_u = true
+    hover_d = false
+
+func _on_RD_mouse_entered():
+    hover_l = false
+    hover_r = true
+    hover_u = false
+    hover_d = true
+
+func _on_LD_mouse_entered():
+    hover_l = true
+    hover_r = false
+    hover_u = false
+    hover_d = true
+
+func _on_mouse_none():
+    hover_l = false
+    hover_r = false
+    hover_u = false
+    hover_d = false

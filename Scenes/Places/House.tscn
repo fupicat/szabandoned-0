@@ -98,6 +98,7 @@ script = ExtResource( 5 )
 shape = SubResource( 4 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="UI" type="Control" parent="HouseUI"]
