@@ -91,7 +91,6 @@ position = Vector2( 0, 74 )
 [node name="NPC" type="KinematicBody2D" parent="." groups=[
 "Interactable",
 ]]
-editor/display_folded = true
 position = Vector2( 1221.91, 443.986 )
 script = ExtResource( 8 )
 
@@ -104,8 +103,12 @@ shape = SubResource( 5 )
 one_shot = true
 
 [node name="Interact" type="Area2D" parent="NPC"]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Interact"]
 shape = SubResource( 6 )
+
+[node name="RayCast2D" type="RayCast2D" parent="NPC"]
+cast_to = Vector2( 500, 0 )
 [connection signal="body_entered" from="ToHouse" to="." method="_on_ToHouse_body_entered"]
 [connection signal="timeout" from="NPC/Wander" to="NPC" method="_on_Wander_timeout"]

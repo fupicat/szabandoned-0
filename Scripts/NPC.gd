@@ -36,7 +36,11 @@ func _ready():
 func _physics_process(delta):
     update_z()
     
+    if behavior == BEHAVE.stop:
+        target = global_position
+    
     if target != null and can_walk:
+        $RayCast2D.cast_to = to_local(target)
         can_walk = true
         $Scrat.scale.x = 1
         if target.x < global_position.x:
@@ -74,14 +78,12 @@ func _on_Interact_body_entered(body):
         on_me = true
         if behavior == BEHAVE.wander:
             behavior = BEHAVE.stop
-            can_walk = false
 
 func _on_Interact_body_exited(body):
     if body == get_parent().get_node('Player'):
         on_me = false
         if behavior == BEHAVE.stop:
             behavior = BEHAVE.wander
-            can_walk = true
             $Wander.start(rand_range(0, 3))
 
 func _on_Interact_mouse_entered():
