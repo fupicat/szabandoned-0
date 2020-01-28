@@ -2,6 +2,10 @@ extends Node
 
 var house = []
 
+const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
+
+var scene_store = ''
+
 func _init():
     pause_mode = Node.PAUSE_MODE_PROCESS
 
@@ -44,3 +48,13 @@ func load_game():
 func pause():
     get_tree().paused = !get_tree().paused
     get_tree().current_scene.get_node('Pause/Pause').visible = get_tree().paused
+
+func transition_scene(var scene, var transition = ''):
+    scene_store = scene
+    var trans = TRANSITION.instance()
+    get_tree().current_scene.add_child(trans)
+    trans.get_node("Anim").connect("animation_finished", Global, 'transition_end')
+    trans.get_node('Anim').play(transition + 'In')
+
+func transition_end(_anim_name):
+    var _err = get_tree().change_scene(scene_store)

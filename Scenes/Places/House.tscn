@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/UI/HouseUI.gd" type="Script" id=6]
 [ext_resource path="res://SimpleTheme.tres" type="Theme" id=7]
 [ext_resource path="res://Scenes/UI/Pause.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
@@ -172,6 +173,8 @@ margin_bottom = 106.0
 text = "Sign"
 
 [node name="Pause" parent="." instance=ExtResource( 8 )]
+
+[node name="Transition" parent="." instance=ExtResource( 9 )]
 [connection signal="body_entered" from="Grama/PlacentDown" to="." method="_on_Placent_body_entered"]
 [connection signal="body_exited" from="Grama/PlacentDown" to="." method="_on_Placent_body_exited"]
 [connection signal="body_entered" from="Grama/PlacentUp" to="." method="_on_PlacentUp_body_entered"]

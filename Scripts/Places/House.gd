@@ -151,7 +151,8 @@ func delete_obj():
 
 func _on_Exit_body_entered(body):
     if body == $Player:
-        var _err = get_tree().change_scene('res://Scenes/Places/Town.tscn')
+        $Player.can_walk = false
+        Global.transition_scene('res://Scenes/Places/Town.tscn')
 
 # Actions
 

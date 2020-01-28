@@ -33,11 +33,8 @@ func _ready():
     if behavior == BEHAVE.wander:
         $Wander.start(rand_range(0, 3))
 
-func _physics_process(delta):
+func _physics_process(_delta):
     update_z()
-    
-    if behavior == BEHAVE.stop:
-        target = global_position
     
     if target != null and can_walk:
         $RayCast2D.cast_to = to_local(target)
@@ -52,6 +49,10 @@ func _physics_process(delta):
             target = null
             can_walk = true
             emit_signal('got_there')
+    
+    if behavior == BEHAVE.stop:
+        target = global_position
+        $Scrat.scale.x = 1 if get_parent().get_node('Player').global_position.x > global_position.x else -1
     
     move = move_and_slide(move)
     anim_walk()

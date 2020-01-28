@@ -7,4 +7,5 @@ func _ready():
 
 func _on_ToHouse_body_entered(body):
     if body == $Player:
-        var _err = get_tree().change_scene('res://Scenes/Places/House.tscn')
+        $Player.can_walk = false
+        Global.transition_scene('res://Scenes/Places/House.tscn')
