@@ -26,18 +26,16 @@ func _physics_process(_delta):
         $Scrat.scale.x = 1
     elif xdir == -1:
         $Scrat.scale.x = -1
-    if !can_walk:
-        if move.x > 0:
-            $Scrat.scale.x = 1
-        else:
-            $Scrat.scale.x = -1
     
-    if target != null and !can_walk and !$Actions.visible:
-        can_walk = false
+    if target != null:
         $Scrat.scale.x = 1
         if target.x < global_position.x:
             $Scrat.scale.x = -1
         move = (target - position).normalized() * (SPEED + RUNADD)
+        if move.x > 0:
+            $Scrat.scale.x = 1
+        else:
+            $Scrat.scale.x = -1
         if (target - position).length() < 20:
             move = Vector2(0, 0)
             global_position = target
@@ -105,8 +103,7 @@ func _input(event):
 func target_mouse():
     if ('on_UI' in get_parent()) and get_parent().on_UI:
         return
-    if can_animate:
-        can_walk = false
+    if can_walk:
         target = get_global_mouse_position()
         for node in get_tree().get_nodes_in_group('Exit'):
             if node.on_me:
@@ -116,6 +113,7 @@ func target_mouse():
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
+        can_walk = false
         $CollisionShape2D.disabled = true
         target = obj.get_node('IntPos').global_position
 
@@ -138,6 +136,8 @@ func cancel_action():
     target = null
     can_animate = true
     can_walk = true
+    for con in get_signal_connection_list('got_there'):
+        disconnect('got_there', con['target'], con['method'])
     $CollisionShape2D.disabled = false
 
 func set_camera(var thing = null):

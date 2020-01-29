@@ -22,6 +22,7 @@ func menu(var object, var actions):
     $Label.text = object.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
     
     get_parent().can_walk = false
+    get_parent().target = null
     var i = 0
     var file = File.new()
     for node in $Menu.get_children():
