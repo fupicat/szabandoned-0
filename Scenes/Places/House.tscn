@@ -35,7 +35,6 @@ z_index = -22
 collision/safe_margin = 0.8
 
 [node name="Grama" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 2838.04 )
 __meta__ = {
 "_edit_group_": true,
@@ -84,7 +83,6 @@ __meta__ = {
 }
 
 [node name="ToTown" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 3893.86, 1550.7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToTown"]
@@ -99,7 +97,6 @@ script = ExtResource( 5 )
 shape = SubResource( 4 )
 
 [node name="HouseUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="UI" type="Control" parent="HouseUI"]
