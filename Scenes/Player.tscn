@@ -85,8 +85,6 @@ position = Vector2( 0, -132.2 )
 current = true
 zoom = Vector2( 1.7, 1.7 )
 process_mode = 0
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="Actions" type="Node2D" parent="."]

@@ -22,10 +22,11 @@ func _physics_process(_delta):
     var xdir = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
     move.x = lerp(move.x, (SPEED + run) * xdir, SLIP) * int(can_walk)
     
-    if xdir == 1:
-        $Scrat.scale.x = 1
-    elif xdir == -1:
-        $Scrat.scale.x = -1
+    if can_walk:
+        if xdir == 1:
+            $Scrat.scale.x = 1
+        elif xdir == -1:
+            $Scrat.scale.x = -1
     
     if target != null:
         $Scrat.scale.x = 1
@@ -40,7 +41,6 @@ func _physics_process(_delta):
             move = Vector2(0, 0)
             global_position = target
             target = null
-            can_walk = true
             emit_signal('got_there')
     
     move = move_and_slide(move)
@@ -108,7 +108,7 @@ func target_mouse():
         for node in get_tree().get_nodes_in_group('Exit'):
             if node.on_me:
                 target = node.global_position
-    else:
+    elif !can_animate:
         cancel_action()
 
 func walk_to(var obj):

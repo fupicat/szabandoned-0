@@ -36,7 +36,9 @@ func _physics_process(_delta):
         $Player.position.y -= 10
 
 func _input(event):
-    if (event.is_action_pressed("action") and edit_mode and !move_mode and !delete_mode) or event.is_action_pressed("mode"):
+    if event.is_action_pressed("action") and edit_mode and !move_mode and !delete_mode:
+        if on_UI:
+            return
         switch_edit_mode()
     if event.is_action_pressed('action') and move_mode:
         move_obj()
@@ -47,15 +49,18 @@ func _input(event):
 func switch_edit_mode(): # Returns true if switched.
     $Player.target = null
     if edit_mode:
+        $Player.can_walk = true
         var cant = false
         for node in get_tree().get_nodes_in_group("Interactable"):
+            if !node.move:
+                continue
             if !node.place():
                 cant = true
         if cant:
             print("One of the items could not be placed.")
             return false
         
-        $HouseUI/UI/Mode.text = "Add Item"
+        $HouseUI/UI/Mode.text = "Edit"
         $HouseUI/UI/Items.hide()
         edit_mode = false
         $Player.global_position = old_xy
@@ -63,12 +68,11 @@ func switch_edit_mode(): # Returns true if switched.
         $Player.show()
         $Player/CollisionShape2D.disabled = false
         $Player.position = Vector2(3195, 1522)
-        $HouseUI/UI/Move.show()
-        $HouseUI/UI/Delete.show()
         move_mode = false
         delete_mode = false
         $HouseUI/UI/Select.hide()
     else:
+        $Player.can_walk = true
         $HouseUI/UI/Mode.text = "Place"
         if delete_mode:
             $HouseUI/UI/Mode.text = "Back"
@@ -84,8 +88,6 @@ func switch_edit_mode(): # Returns true if switched.
         if move_mode or delete_mode:
             $HouseUI/UI/Items.hide()
             $Player.show()
-        $HouseUI/UI/Move.hide()
-        $HouseUI/UI/Delete.hide()
         $HouseUI/UI/Select.text = 'Move this'
         if move_mode or delete_mode:
             $HouseUI/UI/Select.show()

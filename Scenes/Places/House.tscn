@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -21,6 +21,12 @@ extents = Vector2( 260.784, 221.534 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 556.749, 217.628 )
+
+[sub_resource type="InputEventAction" id=5]
+action = "mode"
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
 
 [node name="House" type="Node2D"]
 script = ExtResource( 1 )
@@ -111,7 +117,11 @@ margin_top = 8.0
 margin_right = 84.0
 margin_bottom = 28.0
 mouse_default_cursor_shape = 2
-text = "Add Item"
+shortcut = SubResource( 6 )
+text = "Edit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Select" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
@@ -121,23 +131,39 @@ margin_bottom = 194.0
 mouse_default_cursor_shape = 2
 text = "Select"
 
-[node name="Move" type="Button" parent="HouseUI/UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -297.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = 102.0
+[node name="V" type="VBoxContainer" parent="HouseUI/UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -156.0
+margin_top = -142.0
+margin_right = 156.0
+margin_bottom = 142.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add" type="Button" parent="HouseUI/UI/V"]
+margin_right = 312.0
+margin_bottom = 88.0
+text = "Add Item"
+
+[node name="Move" type="Button" parent="HouseUI/UI/V"]
+margin_top = 98.0
+margin_right = 312.0
+margin_bottom = 186.0
 text = "Move Item"
 
-[node name="Delete" type="Button" parent="HouseUI/UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -332.0
-margin_top = 122.65
-margin_right = -8.0
-margin_bottom = 216.65
+[node name="Delete" type="Button" parent="HouseUI/UI/V"]
+margin_top = 196.0
+margin_right = 312.0
+margin_bottom = 284.0
 text = "Delete Item"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Items" type="ScrollContainer" parent="HouseUI/UI"]
 anchor_top = 1.0
@@ -145,6 +171,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -106.0
 scroll_vertical_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="H" type="HBoxContainer" parent="HouseUI/UI/Items"]
 margin_right = 562.0
@@ -179,8 +208,9 @@ text = "Sign"
 [connection signal="body_entered" from="ToTown" to="." method="_on_Exit_body_entered"]
 [connection signal="pressed" from="HouseUI/UI/Mode" to="HouseUI" method="_on_Mode_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Select" to="HouseUI" method="_on_Select_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Move" to="HouseUI" method="_on_Move_pressed"]
-[connection signal="pressed" from="HouseUI/UI/Delete" to="HouseUI" method="_on_Delete_pressed"]
+[connection signal="pressed" from="HouseUI/UI/V/Add" to="HouseUI" method="_on_Add_pressed"]
+[connection signal="pressed" from="HouseUI/UI/V/Move" to="HouseUI" method="_on_Move_pressed"]
+[connection signal="pressed" from="HouseUI/UI/V/Delete" to="HouseUI" method="_on_Delete_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/SmallRoom" to="HouseUI" method="_on_SmallRoom_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/Sofa" to="HouseUI" method="_on_Sofa_pressed"]
 [connection signal="pressed" from="HouseUI/UI/Items/H/Sign" to="HouseUI" method="_on_Sign_pressed"]
