@@ -181,27 +181,7 @@ func Rotate(var upper):
         upper.get_node('Sprite').texture = load(path + 'Side.png')
     else:
         upper.scale.x = upper.scale.x * -1
-
-func walk2do(var upper, var action):
-    $Player.walk_to(upper)
-    var _err = $Player.connect('got_there', $".", action, [upper])
-
-func Sit(var onwhat):
-    $Player.disconnect('got_there', $".", 'Sit')
-    $Player.can_walk = false
-    var path = onwhat.get_node('Sprite').texture.resource_path
-    $Player.z_index = onwhat.z_index - 1
-    $Player.global_position = onwhat.get_node('Sit').global_position
-    if path.ends_with('Side.png'):
-        if onwhat.scale.x == 1:
-            $Player.animation('SitLeft')
-        else:
-            $Player.animation('SitRight')
-    elif path.ends_with('Front.png'):
-        $Player.z_index = onwhat.z_index + 1
-        $Player.animation('SitFront')
-    elif path.ends_with('Back.png'):
-        $Player.animation('SitFront')
+    $Player.can_walk = true
 
 func Change(var upper):
     $Player/CollisionShape2D.disabled = false

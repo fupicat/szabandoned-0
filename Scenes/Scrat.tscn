@@ -263,6 +263,66 @@ tracks/20/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/21/type = "value"
+tracks/21/path = NodePath("FootBack:z_index")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("HandBack:z_index")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("Body:z_index")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("Head:z_index")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("HandFore:z_index")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Run"
@@ -534,7 +594,7 @@ tracks/21/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "SitBack"
 length = 1.8
 loop = true
@@ -803,7 +863,7 @@ tracks/21/keys = {
 "values": [ -1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "SitFront"
 length = 1.8
 loop = true
@@ -1317,8 +1377,7 @@ tracks/19/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "SitRight"
+[sub_resource type="Animation" id=6]
 length = 1.8
 loop = true
 tracks/0/type = "value"
@@ -1562,7 +1621,7 @@ tracks/19/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -1868,8 +1927,8 @@ texture = ExtResource( 1 )
 autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Run = SubResource( 2 )
-anims/SitBack = SubResource( 7 )
-anims/SitFront = SubResource( 6 )
+anims/SitBack = SubResource( 3 )
+anims/SitFront = SubResource( 4 )
 anims/SitLeft = SubResource( 5 )
-anims/SitRight = SubResource( 3 )
-anims/Walk = SubResource( 4 )
+anims/SitRight = SubResource( 6 )
+anims/Walk = SubResource( 7 )

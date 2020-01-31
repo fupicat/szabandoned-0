@@ -67,7 +67,7 @@ func _input(event):
         hide_menu()
     if event.is_action_pressed("action") and select:
         if active != '' and get_node('Menu/' + active).visible:
-            get_parent().get_parent().call('walk2do', the_obj, the_actions[get_node('Menu/' + active).get_position_in_parent()])
+            action_selected(get_node('Menu/' + active))
         hide_menu()
         if active == '':
             get_parent().can_walk = true
@@ -98,6 +98,11 @@ func _input(event):
         hover_u = false
         hover_d = false
 
+func action_selected(var path):
+    var selected = the_actions[path.get_position_in_parent()]
+    Global.call('walk2do', the_obj, selected)
+    hide_menu()
+
 func _on_Timer_timeout():
     phantom_select = false
     
@@ -106,38 +111,28 @@ func _on_Click_timeout():
         hide_menu()
 
 func _on_L_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/L.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/L)
 
 func _on_R_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/R.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/R)
 
 func _on_U_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/U.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/U)
 
 func _on_D_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/D.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/D)
 
 func _on_LU_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LU.get_position_in_parent()])
-    select = false
-    hide()
-    $Timer.start()
+    action_selected($Menu/LU)
 
 func _on_RU_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RU.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/RU)
 
 func _on_RD_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/RD.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/RD)
 
 func _on_LD_pressed():
-    get_parent().get_parent().call('walk2do', the_obj, the_actions[$Menu/LD.get_position_in_parent()])
-    hide_menu()
+    action_selected($Menu/LD)
 
 func hide_menu():
     get_parent().set_camera()

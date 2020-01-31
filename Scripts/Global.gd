@@ -58,3 +58,36 @@ func transition_scene(var scene, var transition = ''):
 
 func transition_end(_anim_name):
     var _err = get_tree().change_scene(scene_store)
+
+# Actions
+
+func walk2do(var upper, var action):
+    var player = get_tree().current_scene.get_node('Player')
+    player.walk_to(upper)
+    var connect_to = null
+    if has_method(action):
+        connect_to = Global
+    elif get_tree().current_scene.has_method(action):
+        connect_to = get_tree().current_scene
+    assert(connect_to != null)
+    
+    var _err = player.connect('got_there', connect_to, action, [upper])
+
+func Sit(var onwhat):
+    var player = get_tree().current_scene.get_node('Player')
+    
+    player.disconnect('got_there', Global, 'Sit')
+    player.can_walk = false
+    var path = onwhat.get_node('Sprite').texture.resource_path
+    player.z_index = onwhat.z_index - 1
+    player.global_position = onwhat.get_node('Sit').global_position
+    if path.ends_with('Side.png'):
+        if onwhat.scale.x == 1:
+            player.animation('SitRight')
+        else:
+            player.animation('SitLeft')
+    elif path.ends_with('Front.png'):
+        player.z_index = onwhat.z_index + 1
+        player.animation('SitFront')
+    elif path.ends_with('Back.png'):
+        player.animation('SitFront')

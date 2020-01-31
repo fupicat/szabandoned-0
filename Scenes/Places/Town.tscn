@@ -69,6 +69,7 @@ shape = SubResource( 2 )
 ]]
 position = Vector2( 352.356, 154.542 )
 script = ExtResource( 6 )
+interact = PoolStringArray( "Info" )
 info = PoolStringArray( "This path leads to my house.", "Cool!" )
 
 [node name="Sprite" type="Sprite" parent="Sign"]
