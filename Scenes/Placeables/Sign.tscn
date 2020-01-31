@@ -13,8 +13,8 @@ extents = Vector2( 72.2358, 41.1125 )
 "Interactable",
 ]]
 script = ExtResource( 1 )
-interact = [ "Change", "Rotate" ]
-xtra_sprites = [ "Sign", "SignHey", "SignHouse" ]
+interact = PoolStringArray( "Change", "Rotate" )
+xtra_sprites = PoolStringArray( "Sign", "SignHey", "SignHouse" )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -3.40442, -149.04 )

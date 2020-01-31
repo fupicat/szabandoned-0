@@ -2,9 +2,11 @@ extends StaticBody2D
 
 var move = false
 #warning-ignore:UNUSED_CLASS_VARIABLE
-export var interact = []
+export var interact : PoolStringArray = []
 #warning-ignore:UNUSED_CLASS_VARIABLE
-export var xtra_sprites = []
+export var xtra_sprites : PoolStringArray = []
+#warning-ignore:UNUSED_CLASS_VARIABLE
+export var info : PoolStringArray = []
 var on_me = false
 var hover_me = false
 

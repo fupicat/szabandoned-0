@@ -53,6 +53,7 @@ func switch_edit_mode(): # Returns true if switched.
         var cant = false
         for node in get_tree().get_nodes_in_group("Interactable"):
             if !node.move:
+                node.get_node("Col").disabled = false
                 continue
             if !node.place():
                 cant = true

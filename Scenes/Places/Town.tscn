@@ -33,7 +33,6 @@ radius = 202.807
 script = ExtResource( 1 )
 
 [node name="Grama" type="StaticBody2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -68,9 +67,9 @@ shape = SubResource( 2 )
 [node name="Sign" type="StaticBody2D" parent="." groups=[
 "Interactable",
 ]]
-editor/display_folded = true
 position = Vector2( 352.356, 154.542 )
 script = ExtResource( 6 )
+info = PoolStringArray( "This path leads to my house.", "Cool!" )
 
 [node name="Sprite" type="Sprite" parent="Sign"]
 position = Vector2( -3.40442, -149.04 )
@@ -90,7 +89,6 @@ position = Vector2( 0, 74 )
 [node name="NPC" type="KinematicBody2D" parent="." groups=[
 "Interactable",
 ]]
-editor/display_folded = true
 position = Vector2( 1221.91, 443.986 )
 script = ExtResource( 8 )
 
@@ -103,7 +101,6 @@ shape = SubResource( 5 )
 one_shot = true
 
 [node name="Interact" type="Area2D" parent="NPC"]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Interact"]
 shape = SubResource( 6 )
