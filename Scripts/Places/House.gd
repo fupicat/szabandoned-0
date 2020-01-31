@@ -20,12 +20,15 @@ func _ready():
         for item in Global.house:
             var inst = load(item['file']).instance()
             add_child(inst)
-            var posxy = item['pos'].replace('(', '').replace(')', '').replace(' ', '').split(',')
+            
+            var posxy = item['pos'].split(' ')
             inst.global_position.x = float(posxy[0])
             inst.global_position.y = float(posxy[1])
-            var scalexy = item['scale'].replace('(', '').replace(')', '').replace(' ', '').split(',')
+            
+            var scalexy = item['scale'].split(' ')
             inst.scale.x = float(scalexy[0])
             inst.scale.y = float(scalexy[1])
+            
             inst.get_node('Sprite').texture = load(item['sprite'])
             inst.update_z()
 
@@ -36,14 +39,16 @@ func _physics_process(_delta):
         $Player.position.y -= 10
 
 func _input(event):
-    if event.is_action_pressed("action") and edit_mode and !move_mode and !delete_mode:
+    if event.is_action_pressed("action") and edit_mode:
         if on_UI:
             return
+        if move_mode:
+            move_obj()
+            return
+        if delete_mode:
+            delete_obj()
+            return
         switch_edit_mode()
-    if event.is_action_pressed('action') and move_mode:
-        move_obj()
-    if event.is_action_pressed("action") and delete_mode:
-        delete_obj()
         
 
 func switch_edit_mode(): # Returns true if switched.
@@ -187,12 +192,19 @@ func Change(var upper):
     $Player/CollisionShape2D.disabled = false
     $Player.disconnect('got_there', $".", 'Change')
     var i = 0
-    for item in upper.xtra_sprites:
-        if 'res://Art/Placeables/' + item + '.png' == upper.get_node('Sprite').texture.resource_path:
-            if len(upper.xtra_sprites) > i + 1:
-                upper.get_node('Sprite').texture = load('res://Art/Placeables/' + upper.xtra_sprites[i + 1] + '.png')
-            else:
-                upper.get_node('Sprite').texture = load('res://Art/Placeables/' + upper.xtra_sprites[0] + '.png')
+    var sprites = upper.xtra_sprites
+    for item in sprites:
+        
+        var build_path = 'res://Art/Placeables/' + item + '.png'
+        
+        if build_path == upper.get_node('Sprite').texture.resource_path:
+            
+            var what = 'res://Art/Placeables/' + sprites[0] + '.png'
+            if len(sprites) > i + 1:
+                what = 'res://Art/Placeables/' + sprites[i + 1] + '.png'
+                
+            upper.get_node('Sprite').texture = load(what)
             break
+            
         i += 1
     $Player.can_walk = true

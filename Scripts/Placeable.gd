@@ -12,14 +12,15 @@ var hover_me = false
 
 func _ready():
     update_z()
-    var _err = $Interactive.connect("body_entered", $".", '_on_Interactive_body_entered')
-    _err = $Interactive.connect("body_exited", $".", '_on_Interactive_body_exited')
-    _err = $Interactive.connect("mouse_entered", $".", '_on_Interactive_mouse_entered')
-    _err = $Interactive.connect("mouse_exited", $".", '_on_Interactive_mouse_exited')
+    var inter = $Interactive
+    inter.connect("body_entered", $".", '_on_Interactive_body_entered')
+    inter.connect("body_exited", $".", '_on_Interactive_body_exited')
+    inter.connect("mouse_entered", $".", '_on_Interactive_mouse_entered')
+    inter.connect("mouse_exited", $".", '_on_Interactive_mouse_exited')
 
 func _physics_process(_delta):
     if move:
-        global_position = Vector2(clamp(get_parent().get_node("Player").global_position.x, -3500, 3500), clamp(get_parent().get_node("Player").global_position.y, 1000, 4700))
+        global_position = get_parent().get_node("Player").global_position
         update_z()
 
 func update_z():
@@ -41,7 +42,8 @@ func _on_Interactive_mouse_exited():
     hover_me = false
 
 func place():
-    if get_parent().get_node('Grama/Path').get_overlapping_bodies().has(get_parent().get_node('Player')):
+    var grama = get_parent().get_node('Grama/Path')
+    if grama.get_overlapping_bodies().has(get_parent().get_node('Player')):
         return false
     move = false
     $Col.disabled = false

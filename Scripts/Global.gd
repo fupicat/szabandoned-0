@@ -24,7 +24,18 @@ func save_game(var quit = false):
     if get_tree().current_scene.filename == 'res://Scenes/Places/House.tscn':
         house = []
         for node in get_tree().get_nodes_in_group('Interactable'):
-            house.append({'file':node.filename, 'pos':node.global_position, 'sprite':node.get_node('Sprite').texture.resource_path, 'scale':node.scale})
+            
+            # Encoding?
+            var gps = node.global_position
+            var pos = str(gps.x) + ' ' + str(gps.y)
+            gps = node.scale
+            var scl = str(gps.x) + ' ' + str(gps.y)
+            
+            house.append({'file':node.filename,
+                    'pos':pos,
+                    'sprite':node.get_node('Sprite').texture.resource_path,
+                    'scale':scl,
+                    })
     var file = File.new()
     var dir = Directory.new()
     var content = {'house':house, 'scene':get_tree().current_scene.filename}
@@ -46,15 +57,18 @@ func load_game():
     var _err = get_tree().change_scene(loading['scene'])
 
 func pause():
-    get_tree().paused = !get_tree().paused
-    get_tree().current_scene.get_node('Pause/Pause').visible = get_tree().paused
+    var tree = get_tree()
+    tree.paused = !get_tree().paused
+    tree.current_scene.get_node('Pause/Pause').visible = get_tree().paused
 
 func transition_scene(var scene, var transition = ''):
     scene_store = scene
     var trans = TRANSITION.instance()
     get_tree().current_scene.add_child(trans)
-    trans.get_node("Anim").connect("animation_finished", Global, 'transition_end')
-    trans.get_node('Anim').play(transition + 'In')
+    
+    var anim = trans.get_node("Anim")
+    anim.connect("animation_finished", Global, 'transition_end')
+    anim.play(transition + 'In')
 
 func transition_end(_anim_name):
     var _err = get_tree().change_scene(scene_store)

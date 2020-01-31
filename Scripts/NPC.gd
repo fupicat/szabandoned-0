@@ -25,11 +25,6 @@ func _ready():
     update_z()
     randomize()
     
-    var _err = $Interact.connect("body_entered", $".", '_on_Interact_body_entered')
-    _err = $Interact.connect("body_exited", $".", '_on_Interact_body_exited')
-    _err = $Interact.connect("mouse_entered", $".", '_on_Interact_mouse_entered')
-    _err = $Interact.connect("mouse_exited", $".", '_on_Interact_mouse_exited')
-    
     if behavior == BEHAVE.wander:
         $Wander.start(rand_range(0, 3))
 
@@ -52,7 +47,9 @@ func _physics_process(_delta):
     
     if behavior == BEHAVE.stop:
         target = global_position
-        $Scrat.scale.x = 1 if get_parent().get_node('Player').global_position.x > global_position.x else -1
+        $Scrat.scale.x = 1
+        if $'../Player'.global_position.x < global_position.x:
+            $Scrat.scale.x = -1
     
     move = move_and_slide(move)
     anim_walk()
@@ -71,7 +68,11 @@ func animation(var name):
 
 func _on_Wander_timeout():
     if behavior == BEHAVE.wander:
-        target = Vector2(global_position.x + rand_range(-(speed * 3), speed * 3), global_position.y + rand_range(-(speed * 3), speed * 3))
+        
+        var rand_x = global_position.x + rand_range(-(speed * 3), speed * 3)
+        var rand_y = global_position.y + rand_range(-(speed * 3), speed * 3)
+        
+        target = Vector2(rand_x, rand_y)
         $Wander.start(rand_range(0, 3))
 
 func _on_Interact_body_entered(body):

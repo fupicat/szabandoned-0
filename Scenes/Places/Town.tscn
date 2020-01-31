@@ -112,3 +112,7 @@ cast_to = Vector2( 500, 0 )
 [node name="Transition" parent="." instance=ExtResource( 10 )]
 [connection signal="body_entered" from="ToHouse" to="." method="_on_ToHouse_body_entered"]
 [connection signal="timeout" from="NPC/Wander" to="NPC" method="_on_Wander_timeout"]
+[connection signal="body_entered" from="NPC/Interact" to="NPC" method="_on_Interact_body_entered"]
+[connection signal="body_exited" from="NPC/Interact" to="NPC" method="_on_Interact_body_exited"]
+[connection signal="mouse_entered" from="NPC/Interact" to="NPC" method="_on_Interact_mouse_entered"]
+[connection signal="mouse_exited" from="NPC/Interact" to="NPC" method="_on_Interact_mouse_exited"]

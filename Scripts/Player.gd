@@ -15,11 +15,17 @@ func _physics_process(_delta):
     if can_walk or target != null:
         #warning-ignore:NARROWING_CONVERSION
         z_index = global_position.y / 10
+    
+    var up = int(Input.is_action_pressed("up"))
+    var down = int(Input.is_action_pressed("down"))
+    var left = int(Input.is_action_pressed("left"))
+    var right = int(Input.is_action_pressed("right"))
+    
     var run = RUNADD * int(Input.is_action_pressed("run"))
-    var ydir = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
+    var ydir = down - up
     move.y = lerp(move.y, (SPEED + run) * ydir, SLIP) * int(can_walk)
     
-    var xdir = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+    var xdir = right - left
     move.x = lerp(move.x, (SPEED + run) * xdir, SLIP) * int(can_walk)
     
     if can_walk:
@@ -48,57 +54,68 @@ func _physics_process(_delta):
     anim_walk()
 
 func _input(event):
-    if event.is_action_pressed("action") and !$Actions.phantom_select and can_walk:
-        if get_tree().current_scene.filename.ends_with('House.tscn') and get_parent().edit_mode:
+    var is_house = get_tree().current_scene.filename.ends_with('House.tscn')
+    
+    if event.is_action_pressed("action") and !$Actions.phantom_select:
+        if is_house and get_parent().edit_mode or !can_walk:
             return
-        var inters = get_tree().get_nodes_in_group("Interactable")
-        if len(inters) > 0:
-            var onmes = []
-            var upper = null
-            for node in inters: # Get all interactable nodes and detect which ones the player is touching.
-                if node.on_me:
-                    onmes.append(node)
-            var lookings = []
-            for node in onmes: # Get all nodes the player is looking at.
-                if ($Scrat.scale.x > 0 and node.global_position.x > global_position.x) or ($Scrat.scale.x < 0 and node.global_position.x < global_position.x) and !$Actions.visible:
-                    lookings.append(node)
-            if len(lookings) > 0:
-                upper = lookings[0]
-                for node in lookings:
-                    if node.z_index > upper.z_index:
-                        upper = node
-                if len(upper.interact) > 0:
-                    set_camera(upper)
-                    $Actions.menu(upper, upper.interact)
+        interact_with()
+        
     if event.is_action_pressed('run') and !can_animate and !can_walk:
         cancel_action()
+        
     if event.is_action_pressed("click"):
-        if get_tree().current_scene.filename.ends_with('House.tscn') and get_parent().edit_mode:
+        if is_house and get_parent().edit_mode:
             target_mouse()
             return
-        var inters = get_tree().get_nodes_in_group("Interactable")
-        if len(inters) > 0:
-            var onmes = []
-            var upper = null
-            for node in inters: # Get all interactable nodes and detect which ones the mouse is touching.
-                if node.hover_me:
-                    onmes.append(node)
-            if len(onmes) > 0:
-                upper = onmes[0]
-                for node in onmes:
-                    if node.z_index > upper.z_index:
-                        upper = node
-                if len(upper.interact) > 0 and can_animate:
-                    set_camera(upper)
-                    $Actions.menu(upper, upper.interact)
-                else:
-                    target_mouse()
-            else:
-                target_mouse()
-    if event.is_action_pressed("down") or event.is_action_pressed("left") or event.is_action_pressed("right") or event.is_action_pressed("up"):
+        interact_with(true)
+    
+    var up = event.is_action_pressed("up")
+    var down = event.is_action_pressed("down")
+    var left = event.is_action_pressed("left")
+    var right = event.is_action_pressed("right")
+    
+    if up or down or left or right:
         if target != null and !$Actions.visible:
             target = null
             can_walk = true
+
+func interact_with(var mouse = false):
+    var inters = get_tree().get_nodes_in_group("Interactable")
+    
+    if len(inters) > 0 and !$Actions.visible:
+        var onmes = []
+        var upper = null
+        
+        for node in inters: # Get all nodes the player is touching.
+            if (!mouse and node.on_me) or (mouse and node.hover_me):
+                onmes.append(node)
+        
+        var lookings = []
+        if !mouse:
+            for node in onmes: # Get all nodes the player is looking at.
+            
+                var looks_right = $Scrat.scale.x > 0
+                var is_right = node.global_position.x > global_position.x
+            
+                if (looks_right and is_right) or (!looks_right and !is_right):
+                    lookings.append(node)
+        
+        var on_look = onmes if mouse else lookings
+        if len(on_look) > 0:
+            upper = on_look[0]
+            
+            for node in on_look:
+                if node.z_index > upper.z_index:
+                    upper = node
+                    
+            if len(upper.interact) > 0 and can_animate:
+                set_camera(upper)
+                $Actions.menu(upper, upper.interact)
+            elif mouse:
+                target_mouse()
+        elif mouse:
+            target_mouse()
 
 func target_mouse():
     if ('on_UI' in get_parent()) and get_parent().on_UI:

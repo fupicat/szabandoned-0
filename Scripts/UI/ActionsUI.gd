@@ -19,7 +19,8 @@ func menu(var object, var actions):
     the_obj = object
     the_actions = actions
     
-    $Label.text = object.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
+    var obj_name = object.filename.replace('res://Scenes/Placeables/', '')
+    $Label.text = obj_name.replace('.tscn', '')
     
     get_parent().can_walk = false
     get_parent().target = null
@@ -55,7 +56,14 @@ func _process(_delta):
         if hover_d and !hover_u:
             ud = 'D'
         active = lr + ud
-        $Label.text = the_actions[get_node('Menu/' + active).get_position_in_parent()] if active != '' and len(the_actions) > get_node('Menu/' + active).get_position_in_parent() else the_obj.filename.replace('res://Scenes/Placeables/', '').replace('.tscn', '')
+        
+        var act_id = get_node('Menu/' + active).get_position_in_parent()
+        
+        var obj_str = the_obj.filename.replace('res://Scenes/Placeables/', '')
+        $Label.text = obj_str.replace('.tscn', '')
+        
+        if active != '' and len(the_actions) > act_id:
+            $Label.text = the_actions[act_id]
     else:
         active = ''
     if active != '':
