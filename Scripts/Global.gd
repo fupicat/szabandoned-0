@@ -144,5 +144,7 @@ func Info(var what, var requires = []):
         print(what.info)
     else:
         print('I dont know what this is.')
+    player.get_node('CollisionShape2D').disabled = false
+    player.disconnect('got_there', Global, 'Info')
     player.can_walk = true
     return
