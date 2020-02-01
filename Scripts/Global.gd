@@ -1,6 +1,7 @@
 extends Node
 
 var house = []
+var memory = []
 
 const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
 
@@ -19,6 +20,8 @@ func _ready():
 func _input(event):
     if event.is_action_pressed('pause'):
         pause()
+    if event.is_action_pressed("mode"):
+        add_to_memory('sign path')
         
 func save_game(var quit = false):
     if get_tree().current_scene.filename == 'res://Scenes/Places/House.tscn':
@@ -38,7 +41,10 @@ func save_game(var quit = false):
                     })
     var file = File.new()
     var dir = Directory.new()
-    var content = {'house':house, 'scene':get_tree().current_scene.filename}
+    var content = {'house':house,
+            'scene':get_tree().current_scene.filename,
+            'memory':memory,
+            }
     if !dir.dir_exists('user://saves'):
         dir.make_dir('user://saves')
     file.open("user://saves/save1.json", File.WRITE)
@@ -54,6 +60,7 @@ func load_game():
     var loading = parse_json(file.get_as_text())
     file.close()
     house = loading['house']
+    memory = loading['memory']
     var _err = get_tree().change_scene(loading['scene'])
 
 func pause():
@@ -73,9 +80,29 @@ func transition_scene(var scene, var transition = ''):
 func transition_end(_anim_name):
     var _err = get_tree().change_scene(scene_store)
 
+func has_requirements(var requires = []):
+    if len(requires) == 0:
+        return true
+    
+    var i = len(requires)
+    for item in requires:
+        if memory.has(item):
+            i -= 1
+    if i == 0:
+        return true
+    
+    return false
+
+func add_to_memory(var what : String):
+    var to_add = what.split(' ')
+    for item in to_add:
+        if memory.has(item):
+            continue
+        memory.append(item)
+
 # Actions
 
-func walk2do(var upper, var action):
+func walk2do(var upper, var action, var requires = []):
     var player = get_tree().current_scene.get_node('Player')
     player.walk_to(upper)
     var connect_to = null
@@ -85,7 +112,12 @@ func walk2do(var upper, var action):
         connect_to = get_tree().current_scene
     assert(connect_to != null)
     
-    var _err = player.connect('got_there', connect_to, action, [upper])
+    var binds = [upper]
+    if len(requires) != 0:
+        binds.append(requires)
+        print(binds)
+    
+    var _err = player.connect('got_there', connect_to, action, binds)
 
 func Sit(var onwhat):
     var player = get_tree().current_scene.get_node('Player')
@@ -105,3 +137,12 @@ func Sit(var onwhat):
         player.animation('SitFront')
     elif path.ends_with('Back.png'):
         player.animation('SitFront')
+
+func Info(var what, var requires = []):
+    var player = get_tree().current_scene.get_node('Player')
+    if has_requirements(requires):
+        print(what.info)
+    else:
+        print('I dont know what this is.')
+    player.can_walk = true
+    return

@@ -108,7 +108,10 @@ func _input(event):
 
 func action_selected(var path):
     var selected = the_actions[path.get_position_in_parent()]
-    Global.call('walk2do', the_obj, selected)
+    var requires = []
+    if the_obj.requires.has(selected):
+        requires = the_obj.requires[selected].split(' ')
+    Global.call('walk2do', the_obj, selected, requires)
     hide_menu()
 
 func _on_Timer_timeout():

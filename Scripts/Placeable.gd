@@ -7,6 +7,8 @@ export var interact : PoolStringArray = []
 export var xtra_sprites : PoolStringArray = []
 #warning-ignore:UNUSED_CLASS_VARIABLE
 export var info : PoolStringArray = []
+#warning-ignore:UNUSED_CLASS_VARIABLE
+export var requires : Dictionary = {}
 var on_me = false
 var hover_me = false
 

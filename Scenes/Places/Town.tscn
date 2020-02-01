@@ -69,8 +69,14 @@ shape = SubResource( 2 )
 ]]
 position = Vector2( 352.356, 154.542 )
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
 interact = PoolStringArray( "Info" )
 info = PoolStringArray( "This path leads to my house.", "Cool!" )
+requires = {
+"Info": "sign path"
+}
 
 [node name="Sprite" type="Sprite" parent="Sign"]
 position = Vector2( -3.40442, -149.04 )
