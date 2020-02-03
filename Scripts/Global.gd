@@ -4,6 +4,7 @@ var house = []
 var memory = []
 
 const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
+const SPEECH = preload("res://Scenes/UI/TextBubble.tscn")
 
 var scene_store = ''
 
@@ -140,11 +141,19 @@ func Sit(var onwhat):
 
 func Info(var what, var requires = []):
     var player = get_tree().current_scene.get_node('Player')
-    if has_requirements(requires):
-        print(what.info)
-    else:
-        print('I dont know what this is.')
-    player.get_node('CollisionShape2D').disabled = false
     player.disconnect('got_there', Global, 'Info')
+    if has_requirements(requires):
+        yield(cutscene_think(what.info), 'completed')
+    else:
+        yield(cutscene_think(["I don't know what this is."]), 'completed')
+    player.get_node('CollisionShape2D').disabled = false
     player.can_walk = true
     return
+
+func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
+    var speech = SPEECH.instance()
+    get_tree().current_scene.add_child(speech)
+    for item in what:
+        speech.think(item)
+        yield(speech, "ended_line")
+    speech.queue_free()

@@ -116,6 +116,8 @@ func interact_with(var mouse = false):
                 target_mouse()
         elif mouse:
             target_mouse()
+    elif mouse:
+        target_mouse()
 
 func target_mouse():
     if ('on_UI' in get_parent()) and get_parent().on_UI:
