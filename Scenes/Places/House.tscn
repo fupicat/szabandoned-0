@@ -147,19 +147,19 @@ __meta__ = {
 
 [node name="Add" type="Button" parent="HouseUI/UI/V"]
 margin_right = 312.0
-margin_bottom = 88.0
+margin_bottom = 78.0
 text = "Add Item"
 
 [node name="Move" type="Button" parent="HouseUI/UI/V"]
-margin_top = 98.0
+margin_top = 88.0
 margin_right = 312.0
-margin_bottom = 186.0
+margin_bottom = 166.0
 text = "Move Item"
 
 [node name="Delete" type="Button" parent="HouseUI/UI/V"]
-margin_top = 196.0
+margin_top = 176.0
 margin_right = 312.0
-margin_bottom = 284.0
+margin_bottom = 254.0
 text = "Delete Item"
 __meta__ = {
 "_edit_use_anchors_": false
