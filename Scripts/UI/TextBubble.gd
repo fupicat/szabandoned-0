@@ -12,8 +12,25 @@ func _input(event):
         skip = true
 
 func think(var message := 'Error: Could not load text.'):
+    var here = get_tree().current_scene
+    Global.focus_camera(here.get_node('Player'))
+    
     $Control/Name.bbcode_text = ''
     $Control/Background.texture = load("res://Art/GUI/WhiteGradient.tres")
+    $Control/Text.bbcode_text = message
+    $Control/Text.visible_characters = 0
+    skip = false
+    next_char()
+
+func speak(var message := 'Error: Could not load text.',
+        var name = 'error',
+        var obj = null):
+    var here = get_tree().current_scene
+    if obj != null:
+        Global.focus_camera(obj)
+    
+    $Control/Name.bbcode_text = name
+    $Control/Background.texture = load("res://Art/GUI/BlackGradient.tres")
     $Control/Text.bbcode_text = message
     $Control/Text.visible_characters = 0
     skip = false

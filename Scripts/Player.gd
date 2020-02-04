@@ -135,6 +135,10 @@ func walk_to(var obj):
         can_walk = false
         $CollisionShape2D.disabled = true
         target = obj.get_node('IntPos').global_position
+    else:
+        can_walk = false
+        $CollisionShape2D.disabled = true
+        target = global_position
 
 func anim_walk():
     if can_animate:

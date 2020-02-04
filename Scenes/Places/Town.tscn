@@ -95,6 +95,7 @@ position = Vector2( 0, 74 )
 
 [node name="NPC" type="KinematicBody2D" parent="." groups=[
 "Interactable",
+"NPC",
 ]]
 position = Vector2( 1221.91, 443.986 )
 script = ExtResource( 8 )

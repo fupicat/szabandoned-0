@@ -101,6 +101,11 @@ func add_to_memory(var what : String):
             continue
         memory.append(item)
 
+func focus_camera(var obj):
+    var here = get_tree().current_scene
+    if here.has_node('Player/Camera2D'):
+        here.get_node('Player/Camera2D').global_position = obj.global_position
+
 # Actions
 
 func walk2do(var upper, var action, var requires = []):
@@ -117,6 +122,8 @@ func walk2do(var upper, var action, var requires = []):
     if len(requires) != 0:
         binds.append(requires)
         print(binds)
+    
+    print(action, binds)
     
     var _err = player.connect('got_there', connect_to, action, binds)
 
@@ -155,5 +162,44 @@ func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
     get_tree().current_scene.add_child(speech)
     for item in what:
         speech.think(item)
+        yield(speech, "ended_line")
+    speech.queue_free()
+
+func Chat(var what):
+    print('Here')
+    if 'can_walk' in what:
+        what.can_walk = false
+    var player = get_tree().current_scene.get_node('Player')
+    player.disconnect('got_there', Global, 'Chat')
+    player.get_node('Scrat').scale.x = what.get_node('Scrat').scale.x * -1
+    var list = [['NPC', 'Hi'],
+            ['Player', 'Hi'],]
+    yield(cutscene_speak(list), 'completed')
+    player.get_node('CollisionShape2D').disabled = false
+    player.can_walk = true
+    if 'can_walk' in what:
+        what.can_walk = true
+    return
+
+func cutscene_speak(var what = [['Error', 'Dialog data loaded incorrectly.']]):
+    var speech = SPEECH.instance()
+    var here = get_tree().current_scene
+    here.add_child(speech)
+    for item in what:
+        var char_name = 'Error'
+        var obj = null
+        
+        if item[0] == 'Player':
+            char_name = 'You'
+            obj = here.get_node('Player')
+            
+        elif 'id' in here.get_node(item[0]):
+            char_name = here.get_node(item[0]).id.name
+            obj = here.get_node(item[0])
+            
+        elif item[0] is String:
+            char_name = item[0]
+            
+        speech.speak(item[1], char_name, obj)
         yield(speech, "ended_line")
     speech.queue_free()

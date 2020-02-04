@@ -4,9 +4,11 @@ var move = Vector2(0, 0)
 var speed = 500
 const SLIP = 0.20
 
-var interact = []
-var id = {nome = 'Erro',
-        memoria = [],
+var interact = ['Chat']
+var requires = {}
+var id = {
+        name = 'Default Name',
+        memory = [],
         }
 
 var on_me = false
