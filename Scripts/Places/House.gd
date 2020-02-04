@@ -158,8 +158,9 @@ func delete_obj():
         delthis.queue_free()
 
 func _on_Exit_body_entered(body):
-    if body == $Player:
+    if body == $Player and !edit_mode:
         $Player.can_walk = false
+        Global.save_game()
         Global.transition_scene('res://Scenes/Places/Town.tscn')
 
 # Actions

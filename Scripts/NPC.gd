@@ -5,6 +5,9 @@ var speed = 500
 const SLIP = 0.20
 
 var interact = []
+var id = {nome = 'Erro',
+        memoria = [],
+        }
 
 var on_me = false
 var hover_me = false

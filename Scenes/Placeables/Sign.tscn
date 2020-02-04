@@ -10,6 +10,7 @@ extents = Vector2( 59.8019, 30.3613 )
 extents = Vector2( 72.2358, 41.1125 )
 
 [node name="Sign" type="StaticBody2D" groups=[
+"House",
 "Interactable",
 ]]
 script = ExtResource( 1 )
