@@ -1,5 +1,7 @@
 extends Node
 
+var loaded_save = null
+
 var house = []
 var memory = []
 
@@ -11,20 +13,15 @@ var scene_store = ''
 func _init():
     pause_mode = Node.PAUSE_MODE_PROCESS
 
-func _ready():
-    var file = File.new()
-    if file.file_exists("user://saves/save1.json"):
-        load_game()
-    else:
-        save_game()
-
 func _input(event):
     if event.is_action_pressed('pause'):
         pause()
     if event.is_action_pressed("mode"):
         add_to_memory('sign path')
         
-func save_game(var quit = false):
+func save_game(var save = null):
+    if save == null:
+        save = Global.loaded_save
     if get_tree().current_scene.filename == 'res://Scenes/Places/House.tscn':
         house = []
         for node in get_tree().get_nodes_in_group('Interactable'):
@@ -48,16 +45,16 @@ func save_game(var quit = false):
             }
     if !dir.dir_exists('user://saves'):
         dir.make_dir('user://saves')
-    file.open("user://saves/save1.json", File.WRITE)
+    file.open("user://saves/" + save + ".json", File.WRITE)
     file.store_string(to_json(content))
     file.close()
     print('Game saved to ' + OS.get_user_data_dir())
-    if quit:
-        get_tree().quit()
 
-func load_game():
+func load_game(var save = null):
+    if save == null:
+        save = Global.loaded_save
     var file = File.new()
-    file.open("user://saves/save1.json", File.READ_WRITE)
+    file.open("user://saves/" + save + ".json", File.READ_WRITE)
     var loading = parse_json(file.get_as_text())
     file.close()
     house = loading['house']

@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SimpleTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/UI/Menu.gd" type="Script" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0.258824, 0.431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="M" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 30.0
+margin_right = -100.0
+margin_bottom = -30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="V" type="VBoxContainer" parent="M"]
+margin_right = 1720.0
+margin_bottom = 1020.0
+custom_constants/separation = 10
+
+[node name="Title" type="Label" parent="M/V"]
+margin_right = 1720.0
+margin_bottom = 78.0
+text = "SZ (alpha debug)"
+align = 1
+
+[node name="New" type="HBoxContainer" parent="M/V"]
+margin_top = 88.0
+margin_right = 1720.0
+margin_bottom = 176.0
+custom_constants/separation = 10
+
+[node name="LineEdit" type="LineEdit" parent="M/V/New"]
+margin_right = 1360.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+placeholder_text = "Save name here"
+
+[node name="New" type="Button" parent="M/V/New"]
+margin_left = 1370.0
+margin_right = 1720.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 350, 0 )
+text = "New Game"
+
+[node name="Load" type="HBoxContainer" parent="M/V"]
+margin_top = 186.0
+margin_right = 1720.0
+margin_bottom = 264.0
+custom_constants/separation = 10
+
+[node name="OptionButton" type="OptionButton" parent="M/V/Load"]
+margin_right = 1360.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+
+[node name="Load" type="Button" parent="M/V/Load"]
+margin_left = 1370.0
+margin_right = 1720.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 350, 0 )
+text = "Load Game"
+
+[node name="Erase" type="HBoxContainer" parent="M/V"]
+margin_top = 274.0
+margin_right = 1720.0
+margin_bottom = 352.0
+custom_constants/separation = 10
+
+[node name="OptionButton" type="OptionButton" parent="M/V/Erase"]
+margin_right = 1360.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+
+[node name="Erase" type="Button" parent="M/V/Erase"]
+margin_left = 1370.0
+margin_right = 1720.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 350, 0 )
+text = "Erase Save"
+[connection signal="pressed" from="M/V/New/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="M/V/Load/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="M/V/Erase/Erase" to="." method="_on_Erase_pressed"]

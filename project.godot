@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="SZ"
 config/description="SZ life simulator"
-run/main_scene="res://Scenes/Places/House.tscn"
+run/main_scene="res://Scenes/UI/Menu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="SZ"
 config/icon="res://icon.png"

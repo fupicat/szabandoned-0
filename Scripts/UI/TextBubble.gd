@@ -25,7 +25,6 @@ func think(var message := 'Error: Could not load text.'):
 func speak(var message := 'Error: Could not load text.',
         var name = 'error',
         var obj = null):
-    var here = get_tree().current_scene
     if obj != null:
         Global.focus_camera(obj)
     

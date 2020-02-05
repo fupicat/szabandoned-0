@@ -13,4 +13,5 @@ func _on_Load_pressed():
 
 func _on_Quit_pressed():
     Global.pause()
-    Global.save_game(true)
+    Global.save_game()
+    get_tree().quit()

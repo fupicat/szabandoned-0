@@ -95,9 +95,14 @@ func _on_Interact_body_exited(body):
 
 func _on_Interact_mouse_entered():
     hover_me = true
+    if behavior == BEHAVE.wander:
+            behavior = BEHAVE.stop
 
 func _on_Interact_mouse_exited():
     hover_me = false
+    if behavior == BEHAVE.stop:
+            behavior = BEHAVE.wander
+            $Wander.start(rand_range(0, 3))
 
 func update_z():
     #warning-ignore:NARROWING_CONVERSION
