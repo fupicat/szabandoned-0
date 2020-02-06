@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/NPC.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Scrat.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 56.6084, 27.8953 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 202.807
+
+[node name="NPC" type="KinematicBody2D" groups=[
+"Interactable",
+"NPC",
+]]
+position = Vector2( 1221.91, 443.986 )
+script = ExtResource( 1 )
+
+[node name="Scrat" type="Node2D" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Wander" type="Timer" parent="."]
+one_shot = true
+
+[node name="Interact" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 500, 0 )
+[connection signal="timeout" from="Wander" to="." method="_on_Wander_timeout"]
+[connection signal="body_entered" from="Interact" to="." method="_on_Interact_body_entered"]
+[connection signal="body_exited" from="Interact" to="." method="_on_Interact_body_exited"]
+[connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]
+[connection signal="mouse_exited" from="Interact" to="." method="_on_Interact_mouse_exited"]

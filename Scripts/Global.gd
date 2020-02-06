@@ -4,14 +4,55 @@ var loaded_save = null
 
 var house = []
 var memory = []
+var rng_seed = 0
+var npcs = []
+var scene_store = ''
 
 const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
 const SPEECH = preload("res://Scenes/UI/TextBubble.tscn")
 
-var scene_store = ''
+enum LIKES {
+    games,
+    art,
+    nature,
+    food,
+    music,
+    electronics,
+    spaceships,
+    space,
+}
 
-func _init():
+func _ready():
     pause_mode = Node.PAUSE_MODE_PROCESS
+    randomize()
+    rng_seed = floor(rand_range(0, 100000))
+    seed(rng_seed)
+    
+    var file = File.new()
+    file.open('res://Text/NameParts.tres', File.READ)
+    var name_list = file.get_as_text().split('\n', false)
+    file.close()
+    
+    var likes_left = LIKES.values()
+    for _i in range(int(rand_range(3, 6))):
+        var gen_npc = {}
+        
+        var npc_name = ''
+        for _i in range(int(rand_range(2, 4))):
+            npc_name += name_list[randi() % len(name_list)]
+        
+        var npc_likes = int(likes_left[rand_range(0, likes_left.size() - 1)])
+        likes_left.erase(npc_likes)
+        
+        var npc_formal = round(rand_range(-1, 1))
+        if npc_formal == -0:
+            npc_formal = 0
+        
+        gen_npc['name'] = npc_name
+        gen_npc['likes'] = npc_likes
+        gen_npc['formal'] = npc_formal
+        npcs.append(gen_npc)
+    print(npcs)
 
 func _input(event):
     if event.is_action_pressed('pause'):
@@ -42,6 +83,8 @@ func save_game(var save = null):
     var content = {'house':house,
             'scene':get_tree().current_scene.filename,
             'memory':memory,
+            'seed':rng_seed,
+            'npcs':npcs,
             }
     if !dir.dir_exists('user://saves'):
         dir.make_dir('user://saves')

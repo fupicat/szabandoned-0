@@ -6,7 +6,6 @@ func _ready():
 
 func _on_New_pressed():
     Global.loaded_save = $M/V/New/LineEdit.text
-    generate_save()
     Global.transition_scene('res://Scenes/Places/House.tscn')
 
 func _on_Load_pressed():
@@ -19,10 +18,6 @@ func _on_Erase_pressed():
         var dir = Directory.new()
         dir.remove('user://saves/' + $M/V/Erase/OptionButton.text + '.json')
         reload()
-
-func generate_save():
-    # Not done yet
-    pass
 
 func reload():
     $M/V/Load/OptionButton.clear()

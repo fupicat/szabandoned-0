@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Places/Town.gd" type="Script" id=1]
 [ext_resource path="res://Art/Grama.png" type="Texture" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://Scripts/ExitMouse.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Placeable.gd" type="Script" id=6]
 [ext_resource path="res://Art/Placeables/SignHouse.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/NPC.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Scrat.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -22,12 +21,6 @@ extents = Vector2( 59.8019, 30.3613 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 72.2358, 41.1125 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 56.6084, 27.8953 )
-
-[sub_resource type="CircleShape2D" id=6]
-radius = 202.807
 
 [node name="Town" type="Node2D"]
 script = ExtResource( 1 )
@@ -93,33 +86,7 @@ shape = SubResource( 4 )
 [node name="IntPos" type="Position2D" parent="Sign"]
 position = Vector2( 0, 74 )
 
-[node name="NPC" type="KinematicBody2D" parent="." groups=[
-"Interactable",
-"NPC",
-]]
-position = Vector2( 1221.91, 443.986 )
-script = ExtResource( 8 )
-
-[node name="Scrat" parent="NPC" instance=ExtResource( 9 )]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-shape = SubResource( 5 )
-
-[node name="Wander" type="Timer" parent="NPC"]
-one_shot = true
-
-[node name="Interact" type="Area2D" parent="NPC"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Interact"]
-shape = SubResource( 6 )
-
-[node name="RayCast2D" type="RayCast2D" parent="NPC"]
-cast_to = Vector2( 500, 0 )
+[node name="NPC" parent="." instance=ExtResource( 8 )]
 
 [node name="Transition" parent="." instance=ExtResource( 10 )]
 [connection signal="body_entered" from="ToHouse" to="." method="_on_ToHouse_body_entered"]
-[connection signal="timeout" from="NPC/Wander" to="NPC" method="_on_Wander_timeout"]
-[connection signal="body_entered" from="NPC/Interact" to="NPC" method="_on_Interact_body_entered"]
-[connection signal="body_exited" from="NPC/Interact" to="NPC" method="_on_Interact_body_exited"]
-[connection signal="mouse_entered" from="NPC/Interact" to="NPC" method="_on_Interact_mouse_entered"]
-[connection signal="mouse_exited" from="NPC/Interact" to="NPC" method="_on_Interact_mouse_exited"]

@@ -23,12 +23,12 @@ signal got_there
 
 enum BEHAVE {
     stop,
-    wander
+    wander,
 }
 
 func _ready():
     update_z()
-    randomize()
+    seed(Global.rng_seed)
     
     if behavior == BEHAVE.wander:
         $Wander.start(rand_range(0, 3))
