@@ -9,6 +9,8 @@ var requires = {}
 var id = {
         name = 'Default Name',
         memory = [],
+        likes = 0,
+        formal = 0,
         }
 
 var on_me = false
@@ -17,7 +19,7 @@ var hover_me = false
 var target = null
 var can_walk = true
 
-export var behavior = 1
+var behavior = 1
 
 signal got_there
 
@@ -37,7 +39,6 @@ func _physics_process(_delta):
     update_z()
     
     if target != null and can_walk:
-        $RayCast2D.cast_to = to_local(target)
         can_walk = true
         $Scrat.scale.x = 1
         if target.x < global_position.x:
@@ -111,3 +112,9 @@ func update_z():
         z_index -= 1
     else:
         z_index += 1
+
+func load_npc_inst(var npc : Dictionary):
+    assert(npc != null)
+    for thing in npc.keys():
+        if id.keys().has(thing):
+            id[thing] = npc[thing]

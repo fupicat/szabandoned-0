@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/ExitMouse.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Placeable.gd" type="Script" id=6]
 [ext_resource path="res://Art/Placeables/SignHouse.png" type="Texture" id=7]
-[ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Placeables/Spawn.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -86,7 +86,20 @@ shape = SubResource( 4 )
 [node name="IntPos" type="Position2D" parent="Sign"]
 position = Vector2( 0, 74 )
 
-[node name="NPC" parent="." instance=ExtResource( 8 )]
-
 [node name="Transition" parent="." instance=ExtResource( 10 )]
+
+[node name="Spawn" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1103.7, 384.403 )
+
+[node name="Spawn2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2227.33, 531.88 )
+
+[node name="Spawn3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1384.61, 1107.74 )
+
+[node name="Spawn4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2557.4, 1325.44 )
+
+[node name="Spawn5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 3442.26, 447.607 )
 [connection signal="body_entered" from="ToHouse" to="." method="_on_ToHouse_body_entered"]

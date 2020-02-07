@@ -4,6 +4,7 @@ func _ready():
     $Player/Camera2D.limit_left = 0
     $Player/Camera2D.limit_right = 7000
     $Player/Camera2D.limit_bottom = 3780
+    Global.load_npcs()
 
 func _on_ToHouse_body_entered(body):
     if body == $Player:

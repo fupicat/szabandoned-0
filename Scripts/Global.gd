@@ -10,6 +10,7 @@ var scene_store = ''
 
 const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
 const SPEECH = preload("res://Scenes/UI/TextBubble.tscn")
+const NPC = preload('res://Scenes/NPC.tscn')
 
 enum LIKES {
     games,
@@ -48,9 +49,14 @@ func _ready():
         if npc_formal == -0:
             npc_formal = 0
         
+        var scenes = ['res://Scenes/Places/House.tscn',
+                'res://Scenes/Places/Town.tscn',]
+        var npc_scene = scenes[round(rand_range(0, 1))]
+        
         gen_npc['name'] = npc_name
         gen_npc['likes'] = npc_likes
         gen_npc['formal'] = npc_formal
+        gen_npc['scene'] = npc_scene
         npcs.append(gen_npc)
     print(npcs)
 
@@ -66,6 +72,8 @@ func save_game(var save = null):
     if get_tree().current_scene.filename == 'res://Scenes/Places/House.tscn':
         house = []
         for node in get_tree().get_nodes_in_group('Interactable'):
+            if node.is_in_group('NPC'):
+                continue
             
             # Encoding?
             var gps = node.global_position
@@ -102,6 +110,9 @@ func load_game(var save = null):
     file.close()
     house = loading['house']
     memory = loading['memory']
+    rng_seed = loading['seed']
+    npcs = loading['npcs']
+    seed(rng_seed)
     var _err = get_tree().change_scene(loading['scene'])
 
 func pause():
@@ -145,6 +156,16 @@ func focus_camera(var obj):
     var here = get_tree().current_scene
     if here.has_node('Player/Camera2D'):
         here.get_node('Player/Camera2D').global_position = obj.global_position
+
+func load_npcs():
+    for npc in npcs:
+        if npc['scene'] == get_tree().current_scene.filename:
+            var spawnpoints = get_tree().get_nodes_in_group('Spawn')
+            var spawn = spawnpoints[round(rand_range(0, len(spawnpoints) - 1))]
+            var npc_inst = NPC.instance()
+            get_tree().current_scene.add_child(npc_inst)
+            npc_inst.global_position = spawn.global_position
+            npc_inst.load_npc_inst(npc)
 
 # Actions
 
@@ -206,13 +227,13 @@ func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
     speech.queue_free()
 
 func Chat(var what):
-    print('Here')
+    print(what.id)
     if 'can_walk' in what:
         what.can_walk = false
     var player = get_tree().current_scene.get_node('Player')
     player.disconnect('got_there', Global, 'Chat')
     player.get_node('Scrat').scale.x = what.get_node('Scrat').scale.x * -1
-    var list = [['NPC', 'Hi'],
+    var list = [[what.name, 'Hi'],
             ['Player', 'Hi'],]
     yield(cutscene_speak(list), 'completed')
     player.get_node('CollisionShape2D').disabled = false

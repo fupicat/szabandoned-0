@@ -31,6 +31,7 @@ func _ready():
             
             inst.get_node('Sprite').texture = load(item['sprite'])
             inst.update_z()
+    Global.load_npcs()
 
 func _physics_process(_delta):
     if edit_mode and !place_down:

@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="Spawn" type="Position2D" groups=[
+"Spawn",
+]]
+position = Vector2( 2880.44, 1550.17 )
