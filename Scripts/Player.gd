@@ -49,6 +49,9 @@ func _physics_process(_delta):
             target = null
             emit_signal('got_there')
     
+    if can_walk and can_animate:
+        $CollisionShape2D.disabled = false
+    
     move = move_and_slide(move)
     
     anim_walk()
@@ -161,7 +164,6 @@ func cancel_action():
     can_walk = true
     for con in get_signal_connection_list('got_there'):
         disconnect('got_there', con['target'], con['method'])
-    $CollisionShape2D.disabled = false
 
 func set_camera(var thing = null):
     if thing == null:

@@ -58,7 +58,6 @@ func _ready():
         gen_npc['formal'] = npc_formal
         gen_npc['scene'] = npc_scene
         npcs.append(gen_npc)
-    print(npcs)
 
 func _input(event):
     if event.is_action_pressed('pause'):
@@ -158,6 +157,7 @@ func focus_camera(var obj):
         here.get_node('Player/Camera2D').global_position = obj.global_position
 
 func load_npcs():
+    var i = 0
     for npc in npcs:
         if npc['scene'] == get_tree().current_scene.filename:
             var spawnpoints = get_tree().get_nodes_in_group('Spawn')
@@ -165,7 +165,9 @@ func load_npcs():
             var npc_inst = NPC.instance()
             get_tree().current_scene.add_child(npc_inst)
             npc_inst.global_position = spawn.global_position
+            npc_inst.global_position.y += i * 100
             npc_inst.load_npc_inst(npc)
+            i += 1
 
 # Actions
 
@@ -182,9 +184,6 @@ func walk2do(var upper, var action, var requires = []):
     var binds = [upper]
     if len(requires) != 0:
         binds.append(requires)
-        print(binds)
-    
-    print(action, binds)
     
     var _err = player.connect('got_there', connect_to, action, binds)
 
@@ -227,7 +226,6 @@ func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
     speech.queue_free()
 
 func Chat(var what):
-    print(what.id)
     if 'can_walk' in what:
         what.can_walk = false
     var player = get_tree().current_scene.get_node('Player')

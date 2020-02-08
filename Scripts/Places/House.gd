@@ -58,6 +58,8 @@ func switch_edit_mode(): # Returns true if switched.
         $Player.can_walk = true
         var cant = false
         for node in get_tree().get_nodes_in_group("Interactable"):
+            if node.is_in_group('NPC'):
+                continue
             if !node.move:
                 node.get_node("Col").disabled = false
                 continue
@@ -90,6 +92,8 @@ func switch_edit_mode(): # Returns true if switched.
         $Player.hide()
         $HouseUI/UI/Items.show()
         for node in get_tree().get_nodes_in_group("Interactable"):
+            if node.is_in_group('NPC'):
+                continue
             node.get_node("Col").disabled = true
         
         if move_mode or delete_mode:

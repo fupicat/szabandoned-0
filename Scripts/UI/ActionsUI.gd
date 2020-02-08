@@ -19,9 +19,6 @@ func menu(var object, var actions):
     the_obj = object
     the_actions = actions
     
-    var obj_name = object.filename.replace('res://Scenes/Placeables/', '')
-    $Label.text = obj_name.replace('.tscn', '')
-    
     get_parent().can_walk = false
     get_parent().target = null
     var i = 0
@@ -61,6 +58,8 @@ func _process(_delta):
         
         var obj_str = the_obj.filename.replace('res://Scenes/Placeables/', '')
         $Label.text = obj_str.replace('.tscn', '')
+        if the_obj.is_in_group('NPC'):
+            $Label.text = the_obj.id.name
         
         if active != '' and len(the_actions) > act_id:
             $Label.text = the_actions[act_id]
@@ -76,6 +75,8 @@ func _input(event):
     if event.is_action_pressed("action") and select:
         if active != '' and get_node('Menu/' + active).visible:
             action_selected(get_node('Menu/' + active))
+        else:
+            get_parent().can_walk = true
         hide_menu()
         if active == '':
             get_parent().can_walk = true
