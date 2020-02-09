@@ -5,7 +5,7 @@ signal ended_line
 var skip = false
 
 func _input(event):
-    if event.is_action_pressed("action"):
+    if event.is_action_pressed("action") or event.is_action_pressed("click"):
         if $Control/Text.visible_characters == -1:
             emit_signal("ended_line")
             return

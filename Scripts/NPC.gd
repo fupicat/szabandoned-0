@@ -4,7 +4,7 @@ var move = Vector2(0, 0)
 var speed = 500
 const SLIP = 0.20
 
-var interact = ['Chat']
+var interact = ['Greet']
 var requires = {}
 var id = {
         name = 'Default Name',

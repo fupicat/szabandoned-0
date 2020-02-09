@@ -225,15 +225,30 @@ func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
         yield(speech, "ended_line")
     speech.queue_free()
 
-func Chat(var what):
+func Greet(var what):
     if 'can_walk' in what:
         what.can_walk = false
     var player = get_tree().current_scene.get_node('Player')
-    player.disconnect('got_there', Global, 'Chat')
+    player.disconnect('got_there', Global, 'Greet')
     player.get_node('Scrat').scale.x = what.get_node('Scrat').scale.x * -1
-    var list = [[what.name, 'Hi'],
-            ['Player', 'Hi'],]
+    var list = []
+    
+    var greets = ['Hi.', 'Hi!', 'Hello.']
+    
+    list.append(['Player', greets[randi() % len(greets)]])
+    
+    match what.id.formal:
+        -1:
+            greets = ['Hi!', 'Hey!', 'Yo.', 'Howdy!'] #lol
+        0:
+            greets = ['Hi.', 'Hi!', 'Hello.']
+        1:
+            greets = ['Greetings.', 'Hello.']
+    
+    list.append([what.name, greets[randi() % len(greets)]])
+    
     yield(cutscene_speak(list), 'completed')
+    focus_camera(player)
     player.get_node('CollisionShape2D').disabled = false
     player.can_walk = true
     if 'can_walk' in what:
