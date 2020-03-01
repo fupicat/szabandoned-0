@@ -210,14 +210,14 @@ func Info(var what, var requires = []):
     var player = get_tree().current_scene.get_node('Player')
     player.disconnect('got_there', Global, 'Info')
     if has_requirements(requires):
-        yield(cutscene_think(what.info), 'completed')
+        yield(cutscene(what.info), 'completed')
     else:
-        yield(cutscene_think(["I don't know what this is."]), 'completed')
+        yield(cutscene(["I don't know what this is."]), 'completed')
     player.get_node('CollisionShape2D').disabled = false
     player.can_walk = true
     return
 
-func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
+func cutscene(var what = ['Error', 'Dialogue data loaded incorrectly.']):
     var speech = SPEECH.instance()
     get_tree().current_scene.add_child(speech)
     for item in what:
@@ -226,28 +226,37 @@ func cutscene_think(var what = ['Error', 'Dialogue data loaded incorrectly.']):
     speech.queue_free()
 
 func Greet(var what):
+    var myname = what.filename.replace('res://Scenes/Placeables/', '')
+    myname = myname.replace('.tscn', '')
     if 'can_walk' in what:
         what.can_walk = false
+    if 'id' in what:
+        myname = what.id.name.capitalize()
+        
     var player = get_tree().current_scene.get_node('Player')
     player.disconnect('got_there', Global, 'Greet')
     player.get_node('Scrat').scale.x = what.get_node('Scrat').scale.x * -1
     var list = []
     
-    var greets = ['Hi.', 'Hi!', 'Hello.']
+    var rand = ['You say hi to ',
+            'You say hello to ',
+            'You greet ',
+            ]
     
-    list.append(['Player', greets[randi() % len(greets)]])
+    list.append(randItem(rand) + myname + '.')
+    list.append('...')
     
-    match what.id.formal:
-        -1:
-            greets = ['Hi!', 'Hey!', 'Yo.', 'Howdy!'] #lol
-        0:
-            greets = ['Hi.', 'Hi!', 'Hello.']
-        1:
-            greets = ['Greetings.', 'Hello.']
+    rand = [' says hi back!',
+            ' says hello back!',
+            ' greets you back!',
+            ' says hi too!',
+            ' says hello too!',
+            ' greets you too!',
+            ]
     
-    list.append([what.name, greets[randi() % len(greets)]])
+    list.append(myname + randItem(rand))
     
-    yield(cutscene_speak(list), 'completed')
+    yield(cutscene(list), 'completed')
     focus_camera(player)
     player.get_node('CollisionShape2D').disabled = false
     player.can_walk = true
@@ -255,25 +264,5 @@ func Greet(var what):
         what.can_walk = true
     return
 
-func cutscene_speak(var what = [['Error', 'Dialog data loaded incorrectly.']]):
-    var speech = SPEECH.instance()
-    var here = get_tree().current_scene
-    here.add_child(speech)
-    for item in what:
-        var char_name = 'Error'
-        var obj = null
-        
-        if item[0] == 'Player':
-            char_name = 'You'
-            obj = here.get_node('Player')
-            
-        elif 'id' in here.get_node(item[0]):
-            char_name = here.get_node(item[0]).id.name
-            obj = here.get_node(item[0])
-            
-        elif item[0] is String:
-            char_name = item[0]
-            
-        speech.speak(item[1], char_name, obj)
-        yield(speech, "ended_line")
-    speech.queue_free()
+func randItem(list):
+    return list[randi() % len(list)]
