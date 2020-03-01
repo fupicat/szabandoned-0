@@ -21,6 +21,8 @@ var can_walk = true
 
 var behavior = 1
 
+var player = null
+
 signal got_there
 
 enum BEHAVE {
@@ -29,6 +31,9 @@ enum BEHAVE {
 }
 
 func _ready():
+    
+    player = get_tree().current_scene.get_node('Player')
+    
     update_z()
     seed(Global.rng_seed)
     
@@ -54,7 +59,7 @@ func _physics_process(_delta):
     if behavior == BEHAVE.stop:
         target = global_position
         $Scrat.scale.x = 1
-        if $'../Player'.global_position.x < global_position.x:
+        if player.global_position.x < global_position.x:
             $Scrat.scale.x = -1
     
     move = move_and_slide(move)
@@ -82,14 +87,16 @@ func _on_Wander_timeout():
         $Wander.start(rand_range(0, 3))
 
 func _on_Interact_body_entered(body):
-    if body == get_parent().get_node('Player'):
+    if body == player:
         on_me = true
         if behavior == BEHAVE.wander:
             behavior = BEHAVE.stop
 
 func _on_Interact_body_exited(body):
-    if body == get_parent().get_node('Player'):
+    if body == player:
         on_me = false
+        if hover_me or player.get_node('Actions').visible:
+            return
         if behavior == BEHAVE.stop:
             behavior = BEHAVE.wander
             $Wander.start(rand_range(0, 3))
@@ -97,18 +104,20 @@ func _on_Interact_body_exited(body):
 func _on_Interact_mouse_entered():
     hover_me = true
     if behavior == BEHAVE.wander:
-            behavior = BEHAVE.stop
+        behavior = BEHAVE.stop
 
 func _on_Interact_mouse_exited():
     hover_me = false
+    if on_me or player.get_node('Actions').visible:
+        return
     if behavior == BEHAVE.stop:
-            behavior = BEHAVE.wander
-            $Wander.start(rand_range(0, 3))
+        behavior = BEHAVE.wander
+        $Wander.start(rand_range(0, 3))
 
 func update_z():
     #warning-ignore:NARROWING_CONVERSION
     z_index = global_position.y / 10
-    if get_parent().get_node('Player').global_position.y > global_position.y:
+    if player.global_position.y > global_position.y:
         z_index -= 1
     else:
         z_index += 1

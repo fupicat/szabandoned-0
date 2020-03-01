@@ -259,10 +259,10 @@ func Greet(var what):
     yield(cutscene(list), 'completed')
     focus_camera(player)
     player.get_node('CollisionShape2D').disabled = false
-    player.can_walk = true
     if 'can_walk' in what:
         what.can_walk = true
-    return
+    yield(get_tree().create_timer(0.05), 'timeout')
+    player.can_walk = true
 
 func randItem(list):
     return list[randi() % len(list)]

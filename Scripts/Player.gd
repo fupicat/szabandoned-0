@@ -135,6 +135,8 @@ func target_mouse():
 
 func walk_to(var obj):
     if obj.has_node('IntPos'):
+        if 'can_walk' in obj:
+            obj.can_walk = false
         can_walk = false
         $CollisionShape2D.disabled = true
         target = obj.get_node('IntPos').global_position
