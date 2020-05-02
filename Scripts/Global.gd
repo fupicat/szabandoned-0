@@ -8,6 +8,23 @@ var rng_seed = 0
 var npcs = []
 var scene_store = ''
 
+var dateset = {
+    'year': 8100,
+    'month': 10,
+    'day': 10,
+    'daytime': ['Morning', 'Afternoon', 'Late Afternoon', 'Night'],
+    'hours': 5,
+    'energy': 10,
+   }
+var date = {
+    'year': 0,
+    'month': 0,
+    'day': 0,
+    'daytime': 0,
+    'hours': 0,
+    'energy': 0,
+   }
+
 const TRANSITION = preload('res://Scenes/UI/Transition.tscn')
 const SPEECH = preload("res://Scenes/UI/TextBubble.tscn")
 const NPC = preload('res://Scenes/NPC.tscn')
@@ -21,6 +38,14 @@ enum LIKES {
     electronics,
     spaceships,
     space,
+}
+
+enum BEHAVE {
+    stop,
+    wander,
+    work,
+    house,
+    hobby,
 }
 
 func _ready():
@@ -40,22 +65,19 @@ func _ready():
         
         var npc_name = ''
         for _i in range(int(rand_range(2, 4))):
-            npc_name += name_list[randi() % len(name_list)]
+            npc_name += rand_item(name_list)
         
         var npc_likes = int(likes_left[rand_range(0, likes_left.size() - 1)])
         likes_left.erase(npc_likes)
         
-        var npc_formal = round(rand_range(-1, 1))
-        if npc_formal == -0:
-            npc_formal = 0
-        
-        var scenes = ['res://Scenes/Places/House.tscn',
-                'res://Scenes/Places/Town.tscn',]
-        var npc_scene = scenes[round(rand_range(0, 1))]
+        var scenes = [
+                'res://Scenes/Places/House.tscn',
+                'res://Scenes/Places/Town.tscn',
+                ]
+        var npc_scene = rand_item(scenes)
         
         gen_npc['name'] = npc_name
         gen_npc['likes'] = npc_likes
-        gen_npc['formal'] = npc_formal
         gen_npc['scene'] = npc_scene
         npcs.append(gen_npc)
 
@@ -81,17 +103,20 @@ func save_game(var save = null):
             var scl = str(gps.x) + ' ' + str(gps.y)
             
             house.append({'file':node.filename,
-                    'pos':pos,
-                    'sprite':node.get_node('Sprite').texture.resource_path,
-                    'scale':scl,
+                    'pos': pos,
+                    'sprite': node.get_node('Sprite').texture.resource_path,
+                    'scale': scl,
                     })
     var file = File.new()
     var dir = Directory.new()
-    var content = {'house':house,
-            'scene':get_tree().current_scene.filename,
-            'memory':memory,
-            'seed':rng_seed,
-            'npcs':npcs,
+    var content = {
+            'house': house,
+            'scene': get_tree().current_scene.filename,
+            'memory': memory,
+            'seed': rng_seed,
+            'npcs': npcs,
+            'dateset': dateset,
+            'date': date,
             }
     if !dir.dir_exists('user://saves'):
         dir.make_dir('user://saves')
@@ -161,7 +186,7 @@ func load_npcs():
     for npc in npcs:
         if npc['scene'] == get_tree().current_scene.filename:
             var spawnpoints = get_tree().get_nodes_in_group('Spawn')
-            var spawn = spawnpoints[round(rand_range(0, len(spawnpoints) - 1))]
+            var spawn = rand_item(spawnpoints)
             var npc_inst = NPC.instance()
             get_tree().current_scene.add_child(npc_inst)
             npc_inst.global_position = spawn.global_position
@@ -243,7 +268,7 @@ func Greet(var what):
             'You greet ',
             ]
     
-    list.append(randItem(rand) + myname + '.')
+    list.append(rand_item(rand) + myname + '.')
     list.append('...')
     
     rand = [' says hi back!',
@@ -254,7 +279,7 @@ func Greet(var what):
             ' greets you too!',
             ]
     
-    list.append(myname + randItem(rand))
+    list.append(myname + rand_item(rand))
     
     yield(cutscene(list), 'completed')
     focus_camera(player)
@@ -264,5 +289,5 @@ func Greet(var what):
     yield(get_tree().create_timer(0.05), 'timeout')
     player.can_walk = true
 
-func randItem(list):
+func rand_item(list):
     return list[randi() % len(list)]

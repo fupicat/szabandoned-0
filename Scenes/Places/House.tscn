@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Places/House.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/UI/Transition.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Placeables/Spawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/NPC.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Art/GUI/Bolinha.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3531.48, 5.19971 )
@@ -112,6 +113,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Mode" type="Button" parent="HouseUI/UI"]
 margin_left = 8.0
@@ -199,6 +203,31 @@ margin_left = 452.0
 margin_right = 562.0
 margin_bottom = 106.0
 text = "Sign"
+
+[node name="RoomUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="RoomUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="RoomUI/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -190.0
+margin_top = 10.0
+margin_right = 110.0
+margin_bottom = 312.0
+rect_scale = Vector2( 0.6, 0.6 )
+value = 100.0
+texture_progress = ExtResource( 12 )
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Pause" parent="." instance=ExtResource( 8 )]
 

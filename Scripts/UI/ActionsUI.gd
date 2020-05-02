@@ -120,6 +120,7 @@ func _on_Timer_timeout():
     
 func _on_Click_timeout():
     if visible:
+        get_parent().can_walk = true
         hide_menu()
 
 func _on_L_pressed():

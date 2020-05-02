@@ -11,6 +11,7 @@ var id = {
         memory = [],
         likes = 0,
         formal = 0,
+        routine = [],
         }
 
 var on_me = false
@@ -25,19 +26,27 @@ var player = null
 
 signal got_there
 
-enum BEHAVE {
-    stop,
-    wander,
-}
-
 func _ready():
+    $IntPos.position = Vector2(240, 0)
+    if $Scrat.scale.x == -1:
+        $IntPos.position = Vector2(-240, 0)
+    if len(id['routine']) == 0:
+        # Generate routine for the first time
+        var temp_behave = Global.BEHAVE.keys()
+        for _i in range(len(Global.dateset['daytime'])):
+            if len(temp_behave) == 0:
+                temp_behave = Global.BEHAVE.keys()
+            var val = Global.rand_item(temp_behave)
+            id['routine'].append(val)
+            temp_behave.erase(val)
+        print(id.routine)
     
     player = get_tree().current_scene.get_node('Player')
     
     update_z()
     seed(Global.rng_seed)
     
-    if behavior == BEHAVE.wander:
+    if behavior == Global.BEHAVE.wander:
         $Wander.start(rand_range(0, 3))
 
 func _physics_process(_delta):
@@ -56,7 +65,7 @@ func _physics_process(_delta):
             can_walk = true
             emit_signal('got_there')
     
-    if behavior == BEHAVE.stop:
+    if behavior == Global.BEHAVE.stop:
         target = global_position
         $Scrat.scale.x = 1
         if player.global_position.x < global_position.x:
@@ -78,7 +87,7 @@ func animation(var name):
     $Scrat/Anim.play(name)
 
 func _on_Wander_timeout():
-    if behavior == BEHAVE.wander:
+    if behavior == Global.BEHAVE.wander:
         
         var rand_x = global_position.x + rand_range(-(speed * 3), speed * 3)
         var rand_y = global_position.y + rand_range(-(speed * 3), speed * 3)
@@ -89,29 +98,29 @@ func _on_Wander_timeout():
 func _on_Interact_body_entered(body):
     if body == player:
         on_me = true
-        if behavior == BEHAVE.wander:
-            behavior = BEHAVE.stop
+        if behavior == Global.BEHAVE.wander:
+            behavior = Global.BEHAVE.stop
 
 func _on_Interact_body_exited(body):
     if body == player:
         on_me = false
         if hover_me or player.get_node('Actions').visible:
             return
-        if behavior == BEHAVE.stop:
-            behavior = BEHAVE.wander
+        if behavior == Global.BEHAVE.stop:
+            behavior = Global.BEHAVE.wander
             $Wander.start(rand_range(0, 3))
 
 func _on_Interact_mouse_entered():
     hover_me = true
-    if behavior == BEHAVE.wander:
-        behavior = BEHAVE.stop
+    if behavior == Global.BEHAVE.wander:
+        behavior = Global.BEHAVE.stop
 
 func _on_Interact_mouse_exited():
     hover_me = false
     if on_me or player.get_node('Actions').visible:
         return
-    if behavior == BEHAVE.stop:
-        behavior = BEHAVE.wander
+    if behavior == Global.BEHAVE.stop:
+        behavior = Global.BEHAVE.wander
         $Wander.start(rand_range(0, 3))
 
 func update_z():
