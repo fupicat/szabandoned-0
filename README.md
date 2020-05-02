@@ -1,5 +1,5 @@
 # SZ
-Attention: This project is still in early stages of development and is not meant to be played as a game yet.
+Attention: This game has been abandoned at a very early stage of development. Kept here for archival / future consultation by me.
 ## About
 **SZ** is a life simulator game made using the Godot Engine.
 ## License
